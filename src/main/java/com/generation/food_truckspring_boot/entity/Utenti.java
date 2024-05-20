@@ -5,5 +5,5 @@ import jakarta.persistence.Entity;
 @Entity
 public class Utenti {
 
-	private long id;
+	
 }
