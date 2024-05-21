@@ -34,7 +34,7 @@ public class UtentiRestController {
 		if(utente.isEmpty()) {
 			return new ResponseEntity<>(new Utenti(), HttpStatus.NOT_FOUND);
 		}else {
-			return new ResponseEntity<>(utente, HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
 	}
 }
