@@ -47,20 +47,17 @@ public class UtentiRestController {
 	@PostMapping
 	public ResponseEntity<?> aggiuntaUtente(@RequestBody UtentiDTO utenteDTO){
 		
-		if (utenteDTO.getCognome() == null || utenteDTO.getCognome().isEmpty()) {
-	        return new ResponseEntity<>("Il campo 'cognome' non può essere nullo o vuoto", HttpStatus.BAD_REQUEST);
-	    }
+		Utenti utente = new Utenti();
 		
-		Utenti utente = new Utenti(
-					utenteDTO.getNome(),
-					utenteDTO.getCognome(),
-					utenteDTO.getData_nascita(),
-					utenteDTO.getEmail(),
-					utenteDTO.getPassword(),
-					utenteDTO.getRuolo());
+		utente.setNome(utenteDTO.getNome());
+		utente.setCognome(utenteDTO.getCognome());
+		utente.setData_nascita(utenteDTO.getData_nascita());
+		utente.setEmail(utenteDTO.getEmail());
+		utente.setPassword(utenteDTO.getPassword());
+		utente.setRuolo(utenteDTO.getRuolo());
 		
 		Utenti newUtente = utentiServ.aggiungiOModifica(utente);
-		
-		return new ResponseEntity<>(newUtente, HttpStatus.OK);
+		return new ResponseEntity<Utenti>(newUtente, HttpStatus.OK);
 	}
+	
 }

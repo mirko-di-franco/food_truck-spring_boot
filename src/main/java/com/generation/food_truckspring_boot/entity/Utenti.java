@@ -34,7 +34,7 @@ public class Utenti {
 	
 	@Column(nullable = false)
 	private String nome;
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String cognome;
 	@Column(nullable = false)
 	private LocalDate data_nascita;
@@ -70,7 +70,6 @@ public class Utenti {
 	
 
 	public Utenti(String nome, String cognome, LocalDate data_nascita, String email, String password, Ruolo ruolo) {
-		super();
 		this.nome = nome;
 		this.cognome = cognome;
 		this.data_nascita = data_nascita;
