@@ -8,7 +8,7 @@
   </head>
   <body>
     <h1 class="text-center my-4">Lista Utenti</h1>
-    <a class="btn btn-primary" href="/api/utenti/nuovoUtente">Crea Utente</a>
+    <a class="btn btn-primary" href="/utenti/nuovoUtente">Crea Utente</a>
 
 <div th:insert="fragments/sidebar :: block-sidebar"></div>
     
@@ -36,8 +36,8 @@
 					<td th:text="@{${utente.password} + '€'}"></td>
 					<td th:text="@{${utente.ruolo}}"></td>
 					<td style="white-space:nowrap">
-						<a class="btn btn-warning btn-sm" th:href="@{/api/utenti/modificaUtente(idUtente=${utente.id})}" >Modifica</a>
-						<a class="btn btn-danger btn-sm" th:href="@{/api/utenti/eliminazione(idUtente=${utente.id})}" onclick="return confirm('Sicuro di voler cancellare il prodotto?')">Elimina</a>
+						<a class="btn btn-warning btn-sm" th:href="@{/utenti/modificaUtente(idUtente=${utente.id})}" >Modifica</a>
+						<a class="btn btn-danger btn-sm" th:href="@{/utenti/eliminazione(idUtente=${utente.id})}" onclick="return confirm('Sicuro di voler cancellare il prodotto?')">Elimina</a>
 					</td>
 					
 					<!-- utenti.nomeVariabile che si trova nella classe Utenti -->

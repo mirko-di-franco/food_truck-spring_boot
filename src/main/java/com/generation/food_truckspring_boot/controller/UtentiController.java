@@ -50,8 +50,8 @@ public class UtentiController {
 	}
 	
 	
-	
-	@PostMapping("")
+	//-------
+	@GetMapping("")
 	//@valid : esegue la validazione di UtentiDTO utilizzando le annotazioni di validazione presenti nella classe UtentiDTO, come @NotNull, @Size
 	//@ModelAttribute: Spring cerca di legare i dati del form (o altri parametri della richiesta) a un'istanza di UtentiDTO.
 	//@BindingResult: contiene i risultati della validazione di UtentiDTO. Può essere usato per verificare se ci sono stati errori di binding o di validazione.
@@ -72,7 +72,7 @@ public class UtentiController {
 		
 		utentiServ.aggiungiOModifica(utente);
 		
-		return "redirect:/api/utenti";
+		return "redirect:/utenti";
 	}
 	
 	
@@ -129,7 +129,7 @@ public class UtentiController {
 			System.err.println("Utente non trovato");
 		}
 		
-		return "redirect:/api/utenti";
+		return "redirect:/utenti";
 		}
 	
 	
@@ -146,7 +146,7 @@ public class UtentiController {
 			System.out.println("Errore: "+e.getMessage());
 		}
 		
-		return "redirect:/api/utenti";
+		return "redirect:/utenti";
 	}
 	
 		
