@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,9 +27,15 @@ public class Ordini {
 	private BigDecimal totale_ordine;
 
 	
+	//CREO LA RELAZIONE, MANY TO ONE VA INSERITA NELLA TABELLA CHE HA LA FOREIGN KEY
+	@ManyToOne
+	// GLI DICO QUAL'é LA FOREIGN KEY CHE VERRà COLLEGATA ALL'ID DI UTENTI
+	@JoinColumn(name = "utente_id")
+	//RELAZIONE CON L'ENTITà DELLA CLASSE USER
+	private Utenti utenti;
 	
 	
-	//GET E SETTER
+	//GETTER E SETTER
 	
 	public int getId() {
 		return id;
