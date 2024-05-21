@@ -20,7 +20,6 @@ import jakarta.validation.Valid;
 
 
 @Controller
-//@RestController
 @RequestMapping("/utenti")
 public class UtentiController {
 
@@ -51,7 +50,7 @@ public class UtentiController {
 	
 	
 	//-------
-	@GetMapping("")
+	@PostMapping("/nuovoUtente")
 	//@valid : esegue la validazione di UtentiDTO utilizzando le annotazioni di validazione presenti nella classe UtentiDTO, come @NotNull, @Size
 	//@ModelAttribute: Spring cerca di legare i dati del form (o altri parametri della richiesta) a un'istanza di UtentiDTO.
 	//@BindingResult: contiene i risultati della validazione di UtentiDTO. Può essere usato per verificare se ci sono stati errori di binding o di validazione.
@@ -129,6 +128,7 @@ public class UtentiController {
 			System.err.println("Utente non trovato");
 		}
 		
+		//SE SONO RIUSCITO A MODIFICA ALLORA MANDO ALLA HOME DEGLI UTENTI
 		return "redirect:/utenti";
 		}
 	
