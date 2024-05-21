@@ -67,6 +67,19 @@ public class Utenti {
 		this.ruolo = ruolo;
 	}
 
+	
+
+	public Utenti(String nome, String cognome, LocalDate data_nascita, String email, String password, Ruolo ruolo) {
+		super();
+		this.nome = nome;
+		this.cognome = cognome;
+		this.data_nascita = data_nascita;
+		this.email = email;
+		this.password = password;
+		this.ruolo = ruolo;
+		
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -121,6 +134,14 @@ public class Utenti {
 
 	public void setRuolo(Ruolo ruolo) {
 		this.ruolo = ruolo;
+	}
+
+	public List<Ordini> getOrdini() {
+		return ordini;
+	}
+
+	public void setOrdini(List<Ordini> ordini) {
+		this.ordini = ordini;
 	}
 	
 	

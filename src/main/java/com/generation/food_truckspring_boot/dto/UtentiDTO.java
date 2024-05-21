@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import com.generation.food_truckspring_boot.entity.Ruolo;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 public class UtentiDTO {
 
@@ -15,7 +16,7 @@ public class UtentiDTO {
 	@NotEmpty(message = "Il cognome é richiesto")
 	private String cognome;
 	
-	@NotEmpty(message = "La data di nascita é richiesta")
+	@NotNull(message = "La data di nascita é richiesta")
 	private LocalDate data_nascita;
 	
 	@NotEmpty(message = "L'email é richiesta")
@@ -24,7 +25,7 @@ public class UtentiDTO {
 	@NotEmpty(message = "La password é richiesta")
 	private String password;
 	
-	@NotEmpty(message = "La password é richiesta")
+	@NotNull(message = "La password é richiesta")
 	private Ruolo ruolo;
 
 	

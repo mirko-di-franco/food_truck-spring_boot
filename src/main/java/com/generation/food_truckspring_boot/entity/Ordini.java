@@ -3,6 +3,8 @@ package com.generation.food_truckspring_boot.entity;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,6 +34,7 @@ public class Ordini {
 	// GLI DICO QUAL'é LA FOREIGN KEY CHE VERRà COLLEGATA ALL'ID DI UTENTI
 	@JoinColumn(name = "utente_id")
 	//RELAZIONE CON L'ENTITà DELLA CLASSE USER
+	@JsonIgnore
 	private Utenti utenti;
 	
 	
@@ -67,6 +70,14 @@ public class Ordini {
 
 	public void setTotale_ordine(BigDecimal totale_ordine) {
 		this.totale_ordine = totale_ordine;
+	}
+
+	public Utenti getUtenti() {
+		return utenti;
+	}
+
+	public void setUtenti(Utenti utenti) {
+		this.utenti = utenti;
 	}
 	
 	
