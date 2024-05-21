@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +21,7 @@ public class UtentiRestController {
 	@Autowired
 	UtentiServ utentiServ;
 	
-	@GetMapping("/lista")
+	@GetMapping("")
 	//il MODEL è un interfaccia di spring che viene utilizzata per passare dati dal controller alla vista
 	public List<Utenti> listaUtenti(){
 		List<Utenti> utenti = utentiServ.listaUtenti();
@@ -29,12 +30,12 @@ public class UtentiRestController {
 	
 	
 	@GetMapping("/{idUtente}")
-	public ResponseEntity<?> ricercaUtente(long idUtente){
+	public ResponseEntity<?> ricercaUtente(@PathVariable("idUtente") long idUtente){
 		Optional<Utenti> utente = utentiServ.ricercaUtente(idUtente);
 		if(utente.isEmpty()) {
 			return new ResponseEntity<>(new Utenti(), HttpStatus.NOT_FOUND);
 		}else {
-			return new ResponseEntity<>(HttpStatus.OK);
+			return new ResponseEntity<>(utente.get(), HttpStatus.OK);
 		}
 	}
 }
