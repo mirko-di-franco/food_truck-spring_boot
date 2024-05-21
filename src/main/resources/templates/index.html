@@ -14,13 +14,9 @@
         </div>
     </div>
         <div class="container-fluid d-flex p-0">
-            <div class="row-cols  bg-success bg-opacity-25 d-grid gap-2 text-center" style="    height: calc(100vh - 56px);">
-
-                <div class="col p-3"><a href="#" class="btn btn-primary">Home</a></div>
-                <div class="col p-3"><a href="#" class="btn btn-primary">elenco Marchi</a></div>
-                <div class="col p-3"><a href="#" class="btn btn-primary">elenco Foodtrucks</a></div>
-                <div class="col p-3"><a href="api/utenti" class="btn btn-primary">elenco Utenti</a></div>
-            </div>
+        
+            <div th:insert="fragments/sidebar :: block-sidebar"></div>
+            
             <div class="container-fluid text-center bg-light p-3" style="    height: calc(100vh - 56px);overflow-y: auto;">
                 <div class="row">
                     <div class="col m-1">
