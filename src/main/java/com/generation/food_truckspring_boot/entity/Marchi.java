@@ -1,5 +1,7 @@
 package com.generation.food_truckspring_boot.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -7,6 +9,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -47,6 +50,28 @@ public class Marchi {
 	private Genere genere;
 	@Column(nullable = false)
 	private String logo;
+	
+	//ONE TO MANY A FOODTRUCKS
+	@OneToMany(mappedBy = "marchi")
+	private List<Foodtrucks> foodtrucks;
+	
+	//ONE TO MANY A PIATTI
+	@OneToMany(mappedBy = "marchi")
+	private List<Piatti> piatti;
+	
+	
+	public List<Piatti> getPiatti() {
+		return piatti;
+	}
+	public void setPiatti(List<Piatti> piatti) {
+		this.piatti = piatti;
+	}
+	public List<Foodtrucks> getFoodtrucks() {
+		return foodtrucks;
+	}
+	public void setFoodtrucks(List<Foodtrucks> foodtrucks) {
+		this.foodtrucks = foodtrucks;
+	}
 	public long getId() {
 		return id;
 	}

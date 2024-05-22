@@ -1,10 +1,17 @@
 package com.generation.food_truckspring_boot.entity;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -50,6 +57,33 @@ public class Foodtrucks {
 	private boolean disponibilità;
 	@Column(nullable = false)
 	private String immagine;
+	
+	//ONE TO MANY A ORDINI
+	@OneToMany(mappedBy = "foodtrucks")
+	private List<Ordini> ordini;
+	
+	//MANY TO ONE A MARCHI
+	@ManyToOne
+	@JoinColumn(name = "marchio_id")
+	@JsonIgnore
+	private Marchi marchi;
+	
+	
+	
+	
+	
+	public Marchi getMarchi() {
+		return marchi;
+	}
+	public void setMarchi(Marchi marchi) {
+		this.marchi = marchi;
+	}
+	public List<Ordini> getOrdini() {
+		return ordini;
+	}
+	public void setOrdini(List<Ordini> ordini) {
+		this.ordini = ordini;
+	}
 	public long getId() {
 		return id;
 	}

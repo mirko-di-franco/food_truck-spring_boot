@@ -1,6 +1,9 @@
 package com.generation.food_truckspring_boot.entity;
 
 import java.math.BigDecimal;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +12,10 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -56,6 +63,40 @@ public class Piatti {
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private Portata portata;
+	
+	//MANY TO ONE A MARCHI
+	@ManyToOne
+	@JoinColumn(name = "marchio_id")
+	@JsonIgnore
+	private Marchi marchi;
+	
+	//MANY TO MANY A ORDINI si riferisce a riga 41 di ordini
+		@ManyToMany
+		@JoinTable(
+				name = "ordini_dettaglio",
+				joinColumns = @JoinColumn(name="piatto_id"),
+				inverseJoinColumns = @JoinColumn(name="ordine_id")
+				)
+		private List<Ordini> ordini;
+		
+		
+		
+	
+	
+	
+	
+	public List<Ordini> getOrdini() {
+			return ordini;
+		}
+		public void setOrdini(List<Ordini> ordini) {
+			this.ordini = ordini;
+		}
+	public Marchi getMarchi() {
+		return marchi;
+	}
+	public void setMarchi(Marchi marchi) {
+		this.marchi = marchi;
+	}
 	public long getId() {
 		return id;
 	}
