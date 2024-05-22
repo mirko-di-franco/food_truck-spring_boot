@@ -28,7 +28,7 @@ public class UtentiController {
 	
 	
 	
-	// significa che questa rotta funziona sia con "http://localhost:8080/api/utenti" oppure con "http://localhost:8080/api/utenti/"
+	// significa che questa rotta funziona sia con "http://localhost:8080/utenti" oppure con "http://localhost:8080/utenti/"
 	@GetMapping({"", "/"})
 	//il MODEL è un interfaccia di spring che viene utilizzata per passare dati dal controller alla vista
 	public String listaUtenti(Model model) {
