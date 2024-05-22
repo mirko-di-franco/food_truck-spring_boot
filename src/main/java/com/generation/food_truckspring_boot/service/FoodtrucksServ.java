@@ -10,4 +10,8 @@ public class FoodtrucksServ {
 
 	@Autowired
 	FoodtrucksRepo foodtrucksRepo;
+	
+	
+	
+	
 }
