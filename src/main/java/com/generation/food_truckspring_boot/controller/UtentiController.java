@@ -136,14 +136,20 @@ public class UtentiController {
 	
 	
 	@GetMapping("/eliminazione")
-	public String eliminazioneUtente(@RequestParam long idUtente) {
+	public String eliminazioneUtente(@RequestParam long idUtente, Model model) {
 		try {
 			Utenti utente = utentiServ.ricercaUtente(idUtente).get();
 			
 			utentiServ.eliminaUtente(utente);
+			 model.addAttribute("eliminazione", true);
+		     model.addAttribute("messaggio", "Utente eliminato con successo!");
 			
 		}catch(Exception e) {
 			System.out.println("Errore: "+e.getMessage());
+			 model.addAttribute("eliminazione", false);
+		     model.addAttribute("messaggio", "Si è verificato un errore durante l'eliminazione dell'utente.");
+		    
+			 
 		}
 		
 		return "redirect:/utenti";

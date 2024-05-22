@@ -349,6 +349,8 @@ a[data-toggle="collapse"] {
 </head>
 
 <body>
+	
+	
 
 
 		<div class="wrapper d-flex align-items-stretch">
@@ -381,6 +383,16 @@ a[data-toggle="collapse"] {
         <!-- Page Content  -->
       <div id="content" class="p-4 p-md-5 pt-5">
 		  <h1>Lista Utenti</h1>
+		   <div th:if="${eliminazione} ">
+			    <div class="alert alert-success messaggioErrore" role="alert">
+			        <strong>Successo!</strong> <span th:text="${messaggio}"></span>
+			    </div>
+		   </div>
+			<div th:unless="${eliminazione}">
+			    <div class="alert alert-danger messaggioErrore" role="alert">
+			        <strong>Errore!</strong> <span th:text="${messaggio}"></span>
+			    </div>
+			</div>
        		<div class="row">
 				<div class="col-md-12">
 					<div class="table-wrap">
@@ -429,7 +441,11 @@ a[data-toggle="collapse"] {
 
   
 
-
+	<script>
+		 setTimeout(function() {
+		      document.querySelector('.messaggioErrore').style.display = 'none';
+		  }, 3000);
+	</script>
 	
 
 
