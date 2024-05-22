@@ -2,6 +2,7 @@ package com.generation.food_truckspring_boot.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -11,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -27,8 +29,39 @@ public class Ordini {
 	
 	@Column(precision = 8, scale = 2)
 	private BigDecimal totale_ordine;
+	
+	//MANY TO ONE A FOODTRUCKS
+	@ManyToOne
+	@JoinColumn(name="foodtruck_id")
+	@JsonIgnore
+	private Foodtrucks foodtrucks;
 
 	
+	//MANY TO MANY A PIATTI si riferisce a riga 80 di piatti
+	@ManyToMany(mappedBy = "ordini")
+	@JsonIgnore
+	private List<Piatti> piatti;
+	
+	
+	
+	
+	
+	public List<Piatti> getPiatti() {
+		return piatti;
+	}
+
+	public void setPiatti(List<Piatti> piatti) {
+		this.piatti = piatti;
+	}
+
+	public Foodtrucks getFoodtrucks() {
+		return foodtrucks;
+	}
+
+	public void setFoodtrucks(Foodtrucks foodtrucks) {
+		this.foodtrucks = foodtrucks;
+	}
+
 	//CREO LA RELAZIONE, MANY TO ONE VA INSERITA NELLA TABELLA CHE HA LA FOREIGN KEY
 	@ManyToOne
 	// GLI DICO QUAL'é LA FOREIGN KEY CHE VERRà COLLEGATA ALL'ID DI UTENTI
