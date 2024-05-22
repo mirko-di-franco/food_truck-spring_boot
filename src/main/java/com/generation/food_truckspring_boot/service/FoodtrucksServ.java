@@ -20,4 +20,10 @@ public class FoodtrucksServ {
 	}
 	
 	
+	public List<Foodtrucks> trucksPerMarchio(long id){
+        List<Foodtrucks> trucksPerMarchioo = foodtrucksRepo.findByMarchiId(id);
+        return trucksPerMarchioo;
+    }
+
+	
 }
