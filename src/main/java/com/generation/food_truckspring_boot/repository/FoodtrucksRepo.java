@@ -8,4 +8,6 @@ import com.generation.food_truckspring_boot.entity.Foodtrucks;
 @Repository
 public interface FoodtrucksRepo extends JpaRepository<Foodtrucks, Long> {
 
+	
+		
 }
