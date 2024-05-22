@@ -34,12 +34,19 @@ public class FoodtrucksRestController {
 	}
 	
 	
-	 @GetMapping("/marchio/{marchioId}")
-	    public List<Foodtrucks> getFoodtrucksByBrandId(@PathVariable long marchioId) {
+	 @GetMapping("/marchio/id/{marchioId}")
+	    public List<Foodtrucks> getFoodtrucksByMarchioID(@PathVariable long marchioId) {
 	        List<Foodtrucks> trucks = foodtrucksServ.trucksPerMarchio(marchioId);
 	        return trucks;
 	    }
 	
+	 
+
+	 @GetMapping("/marchio/nome/{nomeMarchio}")
+	    public List<Foodtrucks> getFoodtrucksByNomeMarchio(@PathVariable String nomeMarchio) {
+	        List<Foodtrucks> trucks = foodtruckRepo.findByMarchiNome(nomeMarchio);
+	        return trucks;
+	    }
 	
 	
 
