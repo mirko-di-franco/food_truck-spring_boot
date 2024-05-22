@@ -17,9 +17,12 @@ import com.generation.food_truckspring_boot.dto.UtentiDTO;
 import com.generation.food_truckspring_boot.entity.Utenti;
 import com.generation.food_truckspring_boot.service.UtentiServ;
 
+
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @CrossOrigin("*")
+
+
 @RestController
 @RequestMapping("api/utenti")
 public class UtentiRestController {
@@ -47,7 +50,7 @@ public class UtentiRestController {
 	
 	
 	@PostMapping
-	public ResponseEntity<?> aggiuntaUtente(@RequestBody UtentiDTO utenteDTO){
+	public ResponseEntity<?> aggiuntaUtente(@org.springframework.web.bind.annotation.RequestBody UtentiDTO utenteDTO){
 		
 		Utenti utente = new Utenti();
 		
