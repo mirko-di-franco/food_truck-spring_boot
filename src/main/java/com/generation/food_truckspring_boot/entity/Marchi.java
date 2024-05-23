@@ -55,7 +55,7 @@ public class Marchi {
 	
 	//ONE TO MANY A FOODTRUCKS
 	@OneToMany(mappedBy = "marchi")
-	@JsonIgnore
+	
 	private List<Foodtrucks> foodtrucks;
 	
 	//ONE TO MANY A PIATTI

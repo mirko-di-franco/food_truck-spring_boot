@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.generation.food_truckspring_boot.dto.TrucksMarchio;
+import com.generation.food_truckspring_boot.dto.TrucksMarchioDTO;
 import com.generation.food_truckspring_boot.entity.Foodtrucks;
 import com.generation.food_truckspring_boot.entity.Marchi;
 import com.generation.food_truckspring_boot.repository.FoodtrucksRepo;
@@ -39,20 +39,30 @@ public class FoodtrucksRestController {
 	
 	
 	@GetMapping
-	public List<Foodtrucks> getAll(){
-		List<Foodtrucks> trucks = foodtrucksServ.listaTrucks();
-		return trucks;
+	public List<Marchi> getAll(){
+		//prendo tutti i trucks
+		//List<Foodtrucks> trucks = foodtrucksServ.listaTrucks();
+		//prendo tutti i marchi
+		List<Marchi> marchi = marchiServ.listaMarchi();
+		
+		//MarchiTrucksDTO marchiTrucks = new MarchiTrucksDTO();
+		
+		//marchiTrucks.setMarchi(marchi);
+		//marchiTrucks.setTrucks(trucks);
+		
+		
+		return marchi;
 	}
 	
 	
 	 @GetMapping("/marchio/id/{marchioId}")
-	    public TrucksMarchio getFoodtrucksByMarchioID(@PathVariable long marchioId) {
+	    public TrucksMarchioDTO getFoodtrucksByMarchioID(@PathVariable long marchioId) {
 		 	//prendo tutti i trucks per id del marchio
 	        List<Foodtrucks> trucks = foodtrucksServ.trucksPerMarchio(marchioId);
 	        
 	        Optional<Marchi> marchio = marchiServ.ricercaMarchio(marchioId);
 	        
-	        TrucksMarchio trucksMarchio = new TrucksMarchio();
+	        TrucksMarchioDTO trucksMarchio = new TrucksMarchioDTO();
 	        trucksMarchio.setTrucks(trucks);
 	        trucksMarchio.setMarchio(marchio.get());
 	        
