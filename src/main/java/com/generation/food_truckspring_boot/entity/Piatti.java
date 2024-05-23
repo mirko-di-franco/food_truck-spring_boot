@@ -58,6 +58,9 @@ public class Piatti {
 	@Column(nullable = false)
 	private Alimentazione alimentazione;
 	
+	@Column(nullable = false)
+	private String immagine;
+	
 	@Column(nullable = false, precision = 8, scale = 2)
 	private BigDecimal prezzoListino;
 	@Enumerated(EnumType.STRING)
