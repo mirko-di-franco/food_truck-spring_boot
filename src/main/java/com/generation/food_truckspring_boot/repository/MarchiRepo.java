@@ -8,4 +8,6 @@ import com.generation.food_truckspring_boot.entity.Marchi;
 @Repository
 public interface MarchiRepo extends JpaRepository<Marchi, Long> {
 
+	
+	
 }
