@@ -8,5 +8,7 @@ public enum Portata {
     DOLCE,
     SPECIALITÀ,
     CONTORNO,
-    FRITTO
+    FRITTO,
+    KEBAB,
+    POKE
 }
