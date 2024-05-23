@@ -414,8 +414,12 @@ a[data-toggle="collapse"] {
             <td th:text="${marchio.nome}"></td>
             <td th:text="${marchio.descrizione}"></td>
             <td th:text="${marchio.genere}"></td>
-            <td th:text="@{${marchio.logo} + '€'}"></td>
+            <td>
+				<img th:src="${marchio.logo}" alt="..." width="100">
+			</td>
             <td style="white-space:nowrap">
+				<a class="btn btn-primary btn-sm" >Trucks</a>
+				<a class="btn btn-info btn-sm text-white" >Piatti</a>
               <a class="btn btn-warning btn-sm" >Modifica</a>
               <a class="btn btn-danger btn-sm"
                 onclick="return confirm('Sicuro di voler cancellare il prodotto?')">Elimina</a>
