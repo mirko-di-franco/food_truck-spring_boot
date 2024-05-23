@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.generation.food_truckspring_boot.dto.TrucksMarchio;
 import com.generation.food_truckspring_boot.entity.Foodtrucks;
 import com.generation.food_truckspring_boot.entity.Marchi;
 import com.generation.food_truckspring_boot.repository.FoodtrucksRepo;
@@ -45,9 +46,17 @@ public class FoodtrucksRestController {
 	
 	
 	 @GetMapping("/marchio/id/{marchioId}")
-	    public List<Foodtrucks> getFoodtrucksByMarchioID(@PathVariable long marchioId) {
+	    public TrucksMarchio getFoodtrucksByMarchioID(@PathVariable long marchioId) {
+		 	//prendo tutti i trucks per id del marchio
 	        List<Foodtrucks> trucks = foodtrucksServ.trucksPerMarchio(marchioId);
-	        return trucks;
+	        
+	        Optional<Marchi> marchio = marchiServ.ricercaMarchio(marchioId);
+	        
+	        TrucksMarchio trucksMarchio = new TrucksMarchio();
+	        trucksMarchio.setTrucks(trucks);
+	        trucksMarchio.setMarchio(marchio.get());
+	        
+	        return trucksMarchio;
 	    }
 	
 	 
