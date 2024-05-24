@@ -2,6 +2,7 @@ package com.generation.food_truckspring_boot.dto;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.generation.food_truckspring_boot.entity.Foodtrucks;
 import com.generation.food_truckspring_boot.entity.Marchi;
 import com.generation.food_truckspring_boot.entity.Piatti;
@@ -12,7 +13,11 @@ public class TruckPiattiDTO {
 	
 	List<Piatti> piatti;
 	
+	@JsonIgnore
 	Marchi marchi;
+	
+	private String nomeMarchio;
+	private String videoMarchio;
 
 	public Foodtrucks getFoodtrucks() {
 		return foodtrucks;
@@ -36,6 +41,22 @@ public class TruckPiattiDTO {
 
 	public void setMarchi(Marchi marchi) {
 		this.marchi = marchi;
+	}
+
+	public String getNomeMarchio() {
+		return nomeMarchio;
+	}
+
+	public void setNomeMarchio(String nomeMarchio) {
+		this.nomeMarchio = nomeMarchio;
+	}
+
+	public String getVideoMarchio() {
+		return videoMarchio;
+	}
+
+	public void setVideoMarchio(String videoMarchio) {
+		this.videoMarchio = videoMarchio;
 	}
 	
 	

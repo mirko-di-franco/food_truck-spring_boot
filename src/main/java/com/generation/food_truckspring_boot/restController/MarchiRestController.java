@@ -60,9 +60,15 @@ public class MarchiRestController {
 			
 			//prendo i piatti 
 			List<Piatti> piatti = foodtruck.getMarchi().getPiatti();
+			Marchi marchio = foodtruck.getMarchi();
+			String nomeMarchio = marchio.getNome();
+			String videoMarchio = marchio.getVideo();
+			
 			TruckPiattiDTO truckPiatti = new TruckPiattiDTO();
 			truckPiatti.setPiatti(piatti);
 			truckPiatti.setFoodtrucks(foodtruck);
+			truckPiatti.setNomeMarchio(nomeMarchio);
+			truckPiatti.setVideoMarchio(videoMarchio);
 			return new ResponseEntity<TruckPiattiDTO>(truckPiatti, HttpStatus.OK);
 			
 		}else {

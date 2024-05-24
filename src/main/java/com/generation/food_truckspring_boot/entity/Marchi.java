@@ -53,6 +53,9 @@ public class Marchi {
 	@Column(nullable = false)
 	private String logo;
 	
+	@Column()
+	private String video;
+	
 	//ONE TO MANY A FOODTRUCKS
 	@OneToMany(mappedBy = "marchi")
 	
@@ -104,6 +107,12 @@ public class Marchi {
 	}
 	public void setLogo(String logo) {
 		this.logo = logo;
+	}
+	public String getVideo() {
+		return video;
+	}
+	public void setVideo(String video) {
+		this.video = video;
 	}
 	
 	
