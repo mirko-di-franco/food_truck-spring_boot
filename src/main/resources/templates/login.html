@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Login</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<style>
+		.gradient-custom {
+			/* fallback for old browsers */
+			background: #0dd1aa;
+
+			/* Chrome 10-25, Safari 5.1-6 */
+			background: -webkit-linear-gradient(to right, rgb(2, 132, 136), rgb(37, 252, 191));
+
+			/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+			background: linear-gradient(to right, rgb(126, 211, 178), rgb(63, 95, 16))
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<div class="vh-100 gradient-custom">
+		<div class="container py-5 h-100">
+			<div class="row d-flex justify-content-center align-items-center ">
+				<div class="col-12 col-md-8  co-lg-6 col-xl-5 ">
+					<div class="card bg-dark  bg-opacity-75  text-white" style="border-radius: 1rem;">
+						<div class="card-body p-5 text-center">
+							<div class="mb-md-5 mt-md-4 pb-5">
+								<h1 class="fw-bold mb-2 text-uppercase ">Login</h1>
+								<p class="text-white-50 mb-5">Accedi al Pannello di Controllo dell'Amministratore</p>
+								<div class="col d-flex align-items-center  justify-content-center ">
+									<!-- todo chiamata post del form qui -->
+									<form action="/login" method="post" class="mb-4" th:object="${utente}">
+										<!-- todo inserimento email db -->
+										<div data-mdb-input-init class="form-outline form-white mb-4">
+											<input type="email" th:field="*{email}" id="email" class="form-control form-control-lg" />
+											<label class="form-label" for="email">Email</label>
+										</div>
+										
+										<!-- todo inserimento password db -->
+										  <div data-mdb-input-init class="form-outline form-white mb-4">
+											<input type="password" th:field="*{password}" id="password" class="form-control form-control-lg " />
+											<label class="form-label" for="password">Password</label>
+										  </div>
+											<input type="hidden" name="ruolo" value="ADMIN">
+										  <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Password dimenticata?</a></p>
+
+										  <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light  btn-lg px-5" type="submit">Login</button>
+
+										  <div class="d-flex justify-content-center text-center mt-4 pt-1">
+											<a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+											<a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+											<a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+										  </div>
+									
+										  <div th:if="${esito==false}"><span th:text="${messaggio}" class="text-bg-danger d-grid bg-opacity-75 rounded  p-3 m-3 "></span></div>
+										</form>
+									</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
+
+</html>

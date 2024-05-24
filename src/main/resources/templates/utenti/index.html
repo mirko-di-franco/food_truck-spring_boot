@@ -354,13 +354,14 @@ a[data-toggle="collapse"] {
 
 
 		<div class="wrapper d-flex align-items-stretch">
+      <!-- <div th:insert="~{fragments/sidebar}"></div> -->
 			<nav id="sidebar">
 			
 				<div class="p-4">
 		  		<h1><a href="index.html" class="logo">TruckWaY <span>Pannello Amministratore</span></a></h1>
 	        <ul class="list-unstyled components mb-5">
 	          <li>
-	            <a href="/"><span lass="fa fa-home mr-3"></span> Home</a>
+	            <a href="/"><span class="fa fa-home mr-3"></span> Home</a>
 	          </li>
 	          <li class="active">
 	              <a href="/utenti"><span class="fa fa-user mr-3"></span> Lista Utenti</a>
@@ -372,7 +373,9 @@ a[data-toggle="collapse"] {
               <a href="/trucks"><span class="fa fa-sticky-note mr-3"></span> Lista Trucks</a>
 	          </li>
 	        </ul>
-
+          <form action="/logout" method="POST">
+            <input type="submit" class="btn btn-danger" value="Logout">
+            </form>
 	    
 
 	  
