@@ -385,6 +385,9 @@ a[data-toggle="collapse"] {
         <!-- Page Content  -->
       <div id="content" class="p-4 p-md-5 pt-5">
 		  <h1>Lista Marchi</h1>
+		   <div class="text-end mx-4">
+		   <a class="btn btn-primary btn-md mb-3 ms-auto" th:href="@{marchi/nuovoMarchio}">Nuovo Marchio</a>
+		  </div>
 		   <div th:if="${eliminazione} ">
 			    <div class="alert alert-success messaggioErrore" role="alert">
 			        <strong>Successo!</strong> <span th:text="${messaggio}"></span>

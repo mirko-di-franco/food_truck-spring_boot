@@ -386,6 +386,10 @@ a[data-toggle="collapse"] {
         <!-- Page Content  -->
       <div id="content" class="p-4 p-md-5 pt-5">
 		  <h1>Lista Utenti</h1>
+		  <div class="text-end mx-4">
+			  
+		   <a class="btn btn-primary btn-md mb-3 ms-auto" th:href="@{utenti/nuovoUtente}">Nuovo Utente</a>
+		  </div>
 		   <div th:if="${eliminazione} ">
 			    <div class="alert alert-success messaggioErrore" role="alert">
 			        <strong>Successo!</strong> <span th:text="${messaggio}"></span>
@@ -419,14 +423,15 @@ a[data-toggle="collapse"] {
             <td th:text="${utente.nome}"></td>
             <td th:text="${utente.cognome}"></td>
             <td th:text="${utente.data_nascita}"></td>
-            <td th:text="@{${utente.email} + '€'}"></td>
-            <td th:text="@{${utente.password} + '€'}"></td>
+            <td th:text="@{${utente.email}}"></td>
+            <td th:text="@{${utente.password}}"></td>
             <td th:text="@{${utente.ruolo}}"></td>
             <td style="white-space:nowrap">
-              <a class="btn btn-warning btn-sm" th:href="@{utenti/modificaUtente(idUtente=${utente.id})}">Modifica</a>
-              <a class="btn btn-danger btn-sm" th:href="@{utenti/eliminazione(idUtente=${utente.id})}"
-                onclick="return confirm('Sicuro di voler cancellare il prodotto?')">Elimina</a>
-            </td>
+			  <a class="btn btn-warning btn-sm" th:href="@{utenti/modificaUtente(idUtente=${utente.id})}">Modifica</a>
+			  <a class="btn btn-danger btn-sm" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal" th:data-id="${utente.id}">
+			    Elimina
+			  </a>
+			</td>
 
             <!-- utenti.nomeVariabile che si trova nella classe Utenti -->
           </tr>
@@ -441,6 +446,24 @@ a[data-toggle="collapse"] {
        	
       </div>
 		</div>
+		
+		<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Conferma Eliminazione</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Sei sicuro di voler eliminare questo utente?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+        <a id="confirmDeleteBtn" href="#" class="btn btn-danger">Elimina</a>
+      </div>
+    </div>
+  </div>
+</div>
 
   
 
@@ -448,6 +471,18 @@ a[data-toggle="collapse"] {
 		 setTimeout(function() {
 		      document.querySelector('.messaggioErrore').style.display = 'none';
 		  }, 3000);
+		  
+		  
+		   document.addEventListener('DOMContentLoaded', (event) => {
+    let deleteModal = document.getElementById('deleteModal');
+    deleteModal.addEventListener('show.bs.modal', function (event) {
+      let button = event.relatedTarget;
+      let userId = button.getAttribute('data-id');
+
+      let confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+      confirmDeleteBtn.href = 'utenti/eliminazione?idUtente=' + userId;
+    });
+  });
 	</script>
 	
 
