@@ -39,7 +39,7 @@ public class Ordini {
 	
 	//MANY TO MANY A PIATTI si riferisce a riga 80 di piatti
 	@ManyToMany(mappedBy = "ordini")
-	@JsonIgnore
+	
 	private List<Piatti> piatti;
 	
 	
