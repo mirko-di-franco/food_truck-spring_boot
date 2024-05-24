@@ -17,9 +17,6 @@ import com.generation.food_truckspring_boot.dto.UtentiDTO;
 import com.generation.food_truckspring_boot.entity.Utenti;
 import com.generation.food_truckspring_boot.service.UtentiServ;
 
-
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-
 @CrossOrigin("*")
 
 
@@ -41,6 +38,7 @@ public class UtentiRestController {
 	@GetMapping("/{idUtente}")
 	public ResponseEntity<?> ricercaUtente(@PathVariable("idUtente") long idUtente){
 		Optional<Utenti> utente = utentiServ.ricercaUtente(idUtente);
+		
 		if(utente.isEmpty()) {
 			return new ResponseEntity<>(new Utenti(), HttpStatus.NOT_FOUND);
 		}else {

@@ -12,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -38,8 +39,12 @@ public class Ordini {
 
 	
 	//MANY TO MANY A PIATTI si riferisce a riga 80 di piatti
-	@ManyToMany(mappedBy = "ordini")
-	
+	@ManyToMany
+	@JoinTable(
+			name = "ordini_dettaglio",
+			joinColumns = @JoinColumn(name="ordine_id"),
+			inverseJoinColumns = @JoinColumn(name="piatto_id")
+			)
 	private List<Piatti> piatti;
 	
 	
@@ -112,6 +117,8 @@ public class Ordini {
 	public void setUtenti(Utenti utenti) {
 		this.utenti = utenti;
 	}
+
+	
 	
 	
 	
