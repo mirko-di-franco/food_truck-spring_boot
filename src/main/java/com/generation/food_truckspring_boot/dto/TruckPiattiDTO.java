@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.generation.food_truckspring_boot.entity.Foodtrucks;
+import com.generation.food_truckspring_boot.entity.Genere;
 import com.generation.food_truckspring_boot.entity.Marchi;
 import com.generation.food_truckspring_boot.entity.Piatti;
 
@@ -17,6 +18,7 @@ public class TruckPiattiDTO {
 	Marchi marchi;
 	
 	private String nomeMarchio;
+	private Genere genere;
 	private String videoMarchio;
 
 	public Foodtrucks getFoodtrucks() {
@@ -57,6 +59,14 @@ public class TruckPiattiDTO {
 
 	public void setVideoMarchio(String videoMarchio) {
 		this.videoMarchio = videoMarchio;
+	}
+
+	public Genere getGenere() {
+		return genere;
+	}
+
+	public void setGenere(Genere genereMarchio) {
+		this.genere = genereMarchio;
 	}
 	
 	

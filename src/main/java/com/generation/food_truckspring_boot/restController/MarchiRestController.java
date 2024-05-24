@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.generation.food_truckspring_boot.dto.TruckPiattiDTO;
 import com.generation.food_truckspring_boot.entity.Foodtrucks;
+import com.generation.food_truckspring_boot.entity.Genere;
 import com.generation.food_truckspring_boot.entity.Marchi;
 import com.generation.food_truckspring_boot.entity.Piatti;
 import com.generation.food_truckspring_boot.service.FoodtrucksServ;
@@ -63,11 +64,13 @@ public class MarchiRestController {
 			Marchi marchio = foodtruck.getMarchi();
 			String nomeMarchio = marchio.getNome();
 			String videoMarchio = marchio.getVideo();
+			Genere genereMarchio = marchio.getGenere();
 			
 			TruckPiattiDTO truckPiatti = new TruckPiattiDTO();
 			truckPiatti.setPiatti(piatti);
 			truckPiatti.setFoodtrucks(foodtruck);
 			truckPiatti.setNomeMarchio(nomeMarchio);
+			truckPiatti.setGenere(genereMarchio);
 			truckPiatti.setVideoMarchio(videoMarchio);
 			return new ResponseEntity<TruckPiattiDTO>(truckPiatti, HttpStatus.OK);
 			
