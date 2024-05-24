@@ -63,7 +63,7 @@ public class FoodtrucksRestController {
 	        Optional<Marchi> marchio = marchiServ.ricercaMarchio(marchioId);
 	        
 	        TrucksMarchioDTO trucksMarchio = new TrucksMarchioDTO();
-	        trucksMarchio.setTrucks(trucks);
+	        //trucksMarchio.setTrucks(trucks);
 	        trucksMarchio.setMarchio(marchio.get());
 	        
 	        return trucksMarchio;

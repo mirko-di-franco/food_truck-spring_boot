@@ -18,4 +18,7 @@ public class OrdiniServ {
 		List<Ordini> ordini = ordiniRepo.findAll();
 		return ordini;
 	}
+	
+	
+	
 }

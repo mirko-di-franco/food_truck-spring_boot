@@ -1,15 +1,12 @@
 package com.generation.food_truckspring_boot.dto;
 
-import java.util.List;
-
-import com.generation.food_truckspring_boot.entity.Foodtrucks;
 import com.generation.food_truckspring_boot.entity.Marchi;
 
 public class TrucksMarchioDTO {
 
 	Marchi marchio;
 	
-	List<Foodtrucks> trucks;
+	//List<Foodtrucks> trucks;
 
 	public Marchi getMarchio() {
 		return marchio;
@@ -19,6 +16,7 @@ public class TrucksMarchioDTO {
 		this.marchio = marchio;
 	}
 
+	/*
 	public List<Foodtrucks> getTrucks() {
 		return trucks;
 	}
@@ -27,6 +25,7 @@ public class TrucksMarchioDTO {
 		this.trucks = trucks;
 	}
 
+	 */
 	
 	
 }
