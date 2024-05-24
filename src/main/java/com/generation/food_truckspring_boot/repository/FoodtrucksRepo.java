@@ -13,5 +13,10 @@ public interface FoodtrucksRepo extends JpaRepository<Foodtrucks, Long> {
 	List<Foodtrucks> findByMarchiId(long marchioId);
 	
 	List<Foodtrucks> findByMarchiNome(String nomeMarchio);
+	
+	
+	
+	
+	
 		
 }

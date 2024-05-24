@@ -35,11 +35,12 @@ public class Piatti {
 	 * @param prezzoListino
 	 * @param portata
 	 */
-	public Piatti(long id, String nome, String descrizione, Alimentazione alimentazione, BigDecimal prezzoListino,
+	public Piatti(long id, String nome, String descrizione,String immagine, Alimentazione alimentazione, BigDecimal prezzoListino,
 			Portata portata) {
 		this.id = id;
 		this.nome = nome;
 		this.descrizione = descrizione;
+		this.immagine = immagine;
 		this.alimentazione = alimentazione;
 		this.prezzoListino = prezzoListino;
 		this.portata = portata;
@@ -57,6 +58,9 @@ public class Piatti {
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private Alimentazione alimentazione;
+	
+	@Column(nullable = false)
+	private String immagine;
 	
 	@Column(nullable = false, precision = 8, scale = 2)
 	private BigDecimal prezzoListino;
@@ -77,6 +81,7 @@ public class Piatti {
 				joinColumns = @JoinColumn(name="piatto_id"),
 				inverseJoinColumns = @JoinColumn(name="ordine_id")
 				)
+		@JsonIgnore
 		private List<Ordini> ordini;
 		
 		
@@ -132,6 +137,12 @@ public class Piatti {
 	}
 	public void setPortata(Portata portata) {
 		this.portata = portata;
+	}
+	public String getImmagine() {
+		return immagine;
+	}
+	public void setImmagine(String immagine) {
+		this.immagine = immagine;
 	}
 	
 	

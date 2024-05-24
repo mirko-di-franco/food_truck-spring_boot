@@ -2,6 +2,8 @@ package com.generation.food_truckspring_boot.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -51,14 +53,18 @@ public class Marchi {
 	@Column(nullable = false)
 	private String logo;
 	
+	@Column()
+	private String video;
+	
 	//ONE TO MANY A FOODTRUCKS
 	@OneToMany(mappedBy = "marchi")
+	
 	private List<Foodtrucks> foodtrucks;
 	
 	//ONE TO MANY A PIATTI
 	@OneToMany(mappedBy = "marchi")
+	@JsonIgnore
 	private List<Piatti> piatti;
-	
 	
 	public List<Piatti> getPiatti() {
 		return piatti;
@@ -101,6 +107,12 @@ public class Marchi {
 	}
 	public void setLogo(String logo) {
 		this.logo = logo;
+	}
+	public String getVideo() {
+		return video;
+	}
+	public void setVideo(String video) {
+		this.video = video;
 	}
 	
 	

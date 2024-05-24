@@ -21,8 +21,6 @@ import com.generation.food_truckspring_boot.repository.UtentiRepo;
 import com.generation.food_truckspring_boot.service.UtentiServ;
 
 
-
-
 @CrossOrigin("*")
 
 
@@ -47,6 +45,7 @@ public class UtentiRestController {
 	@GetMapping("/{idUtente}")
 	public ResponseEntity<?> ricercaUtente(@PathVariable("idUtente") long idUtente){
 		Optional<Utenti> utente = utentiServ.ricercaUtente(idUtente);
+		
 		if(utente.isEmpty()) {
 			return new ResponseEntity<>(new Utenti(), HttpStatus.NOT_FOUND);
 		}else {
