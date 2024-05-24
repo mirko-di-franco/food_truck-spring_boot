@@ -29,4 +29,11 @@ public class MarchiServ {
 	}
 	
 	
+	//AGGIUNTA O MODIFICA MARCHIO
+	public Marchi aggiuntaOModificaMarchio(Marchi marchio) {
+		Marchi newMarchio = marchiRepo.save(marchio);
+		return newMarchio;
+	}
+	
+	
 }
