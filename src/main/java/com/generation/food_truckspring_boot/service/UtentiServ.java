@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.generation.food_truckspring_boot.entity.Ruolo;
 import com.generation.food_truckspring_boot.entity.Utenti;
 import com.generation.food_truckspring_boot.repository.UtentiRepo;
 
@@ -15,6 +16,7 @@ public class UtentiServ {
 
 	@Autowired
 	UtentiRepo utentiRepo;
+	
 	
 	//METODO TUTTI UTENTI
 	public List<Utenti> listaUtenti(){
@@ -44,6 +46,15 @@ public class UtentiServ {
 		utentiRepo.delete(utente);
 	}
 	
+	public Optional<Utenti> findByEmailAndPasswordAndRuolo(String email, String password, Ruolo ruolo){
+		return utentiRepo.findByEmailAndPasswordAndRuolo(email, password, ruolo.ADMIN);
+		
+	}
+
+
+	public Optional<Utenti> findByEmailAndPassword(String email, String password) {
+		return utentiRepo.findByEmailAndPassword(email, password);
+	}
 	
 	
 	
