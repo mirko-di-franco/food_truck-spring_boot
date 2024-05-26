@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.generation.food_truckspring_boot.dto.IdUtenteDTO;
 import com.generation.food_truckspring_boot.dto.LoginDto;
 import com.generation.food_truckspring_boot.dto.UtentiDTO;
 import com.generation.food_truckspring_boot.entity.Utenti;
@@ -88,13 +89,26 @@ public class UtentiRestController {
 			return new ResponseEntity<>(loginDto,HttpStatus.OK);
 		}
 		
+	}
+	
 		
+	@GetMapping("/email/{email}")
+	public ResponseEntity<?> ricercaUtenteByEmail(@PathVariable("email") String userEmail){
 		
+		Optional<Utenti> utente = utentiServ.findByEmail(userEmail);
 		
+		long utenteId = utente.get().getId();
 		
+		IdUtenteDTO utenteDTO = new IdUtenteDTO();
 		
+		utenteDTO.setId(utenteId);
 		
-		
+		if(utente.isEmpty()) {
+			return new ResponseEntity<>(new Utenti(), HttpStatus.NOT_FOUND);
+		}else {
+			return new ResponseEntity<>(utenteDTO, HttpStatus.OK);
+		}
+			
 	}
 	
 	
