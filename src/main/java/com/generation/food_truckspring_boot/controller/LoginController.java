@@ -50,7 +50,7 @@ public class LoginController {
 			Optional<Utenti>utenteOpt = utentiServ.findByEmailAndPasswordAndRuolo(utente.getEmail(), utente.getPassword(),utente.getRuolo());
 			if (utenteOpt.isPresent() && utenteOpt.get().getRuolo().equals(ruolo)) {
 				session.setAttribute("utente", utenteOpt.get()); 
-				return "redirect:/";
+				return "redirect:/home";
 				
 				
 			}else {
