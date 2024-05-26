@@ -25,7 +25,7 @@ public class IndexCtrl {
 	HttpSession httpSession;
 	
 	
-	@RequestMapping("/")
+	@RequestMapping("/home")
 	public String base( Model model) { 
 		//user non serve se si usa session.getAttribute("user") 
 		// lo user viene inserito AUTOMATICAMENTE nel model per il template
