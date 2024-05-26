@@ -19,4 +19,6 @@ public interface UtentiRepo extends JpaRepository<Utenti, Long>{
 	Optional<Utenti> findByEmailAndPassword(String email, String password);
 	
 	boolean existsByEmail(String email);
+	
+	Optional<Utenti> findByEmail(String email);
 }

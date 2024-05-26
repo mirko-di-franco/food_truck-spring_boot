@@ -57,6 +57,9 @@ public class UtentiServ {
 	}
 	
 	
+	public Optional<Utenti> findByEmail(String email){
+		return utentiRepo.findByEmail(email);
+	}
 	
 	
 	
