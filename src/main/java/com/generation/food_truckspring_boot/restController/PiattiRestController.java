@@ -1,5 +1,6 @@
 package com.generation.food_truckspring_boot.restController;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,13 @@ public class PiattiRestController {
 		}else {
 			return new ResponseEntity<Piatti>(piatto.get(), HttpStatus.OK);
 		}
+	}
+	
+	
+	@GetMapping("/marchio/{idMarchio}")
+	public List<Piatti> findPiattiByMarchioId(@PathVariable("idMarchio") long idMarchio){
+		List<Piatti> piatti = piattiServ.listaPiattiByIdMarchio(idMarchio);
+		return piatti;
 	}
 	
 }

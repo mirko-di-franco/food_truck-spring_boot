@@ -1,5 +1,6 @@
 package com.generation.food_truckspring_boot.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +18,12 @@ public class PiattiServ {
 	public Optional<Piatti> piattoPerId(long idPiatto){
 		Optional<Piatti> piatto = piattiRepo.findById(idPiatto);
 		return piatto;
+	}
+	
+	
+	//LISTA PIATTI PER ID MARCHIO
+	public List<Piatti> listaPiattiByIdMarchio(long idMarchio){
+		List<Piatti> piatti = piattiRepo.findByMarchiId(idMarchio);
+		return piatti;
 	}
 }
