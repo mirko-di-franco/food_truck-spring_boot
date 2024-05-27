@@ -8,13 +8,16 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.generation.food_truckspring_boot.dto.MarchiDTO;
 import com.generation.food_truckspring_boot.entity.Marchi;
+import com.generation.food_truckspring_boot.entity.Piatti;
 import com.generation.food_truckspring_boot.service.MarchiServ;
+import com.generation.food_truckspring_boot.service.PiattiServ;
 
 import jakarta.validation.Valid;
 
@@ -24,6 +27,9 @@ public class MarchiController {
 
 	@Autowired
 	MarchiServ marchiServ;
+	
+	@Autowired
+	PiattiServ piattiServ;
 	
 	// significa che questa rotta funziona sia con "http://localhost:8080/marchi" oppure con "http://localhost:8080/marchi/"
 		@GetMapping({"", "/"})
@@ -145,5 +151,17 @@ public class MarchiController {
 			}
 			
 			return "redirect:/marchi";
+		}
+		
+		
+		
+		@GetMapping("/{idMarchio}/piatti")
+		public String paginaModificaUtente(Model model, @RequestParam long idMarchio, @PathVariable("idMArchio") long idMArchio ) {
+			
+			List<Piatti> piatti = piattiServ.listaPiattiByIdMarchio(idMarchio);
+			model.addAttribute("piatti", piatti);
+			
+			
+			return "marchi/listaPiattiMarchio";
 		}
 }
