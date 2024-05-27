@@ -425,12 +425,6 @@ a[data-toggle="collapse"] {
             <td style="white-space:nowrap">
 
 				<a class="btn btn-primary btn-sm" th:href="@{/marchi/listaTrucks/}+${marchio.id}">Trucks</a>
-				<a class="btn btn-info btn-sm text-white" >Piatti</a>
-              <a class="btn btn-warning btn-sm" >Modifica</a>
-              <a class="btn btn-danger btn-sm"
-                onclick="return confirm('Sicuro di voler cancellare il prodotto?')">Elimina</a>
-
-				<a class="btn btn-primary btn-sm" >Trucks</a>
 				<a class="btn btn-info btn-sm text-white" th:href="@{/marchi/piatti/}+${marchio.id}">Piatti</a>
               <a class="btn btn-warning btn-sm"  th:href="@{marchi/modificaMarchio(idMarchio=${marchio.id})}">Modifica</a>
              <a class="btn btn-danger btn-sm" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal" th:data-id="${marchio.id}">

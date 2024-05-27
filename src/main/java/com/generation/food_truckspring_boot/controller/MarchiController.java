@@ -18,11 +18,8 @@ import com.generation.food_truckspring_boot.dto.MarchiDTO;
 import com.generation.food_truckspring_boot.dto.TruckDTO;
 import com.generation.food_truckspring_boot.entity.Foodtrucks;
 import com.generation.food_truckspring_boot.entity.Marchi;
-
-import com.generation.food_truckspring_boot.service.FoodtrucksServ;
-
 import com.generation.food_truckspring_boot.entity.Piatti;
-
+import com.generation.food_truckspring_boot.service.FoodtrucksServ;
 import com.generation.food_truckspring_boot.service.MarchiServ;
 import com.generation.food_truckspring_boot.service.PiattiServ;
 
@@ -36,9 +33,9 @@ public class MarchiController {
 	MarchiServ marchiServ;
 	
 	@Autowired
-
 	FoodtrucksServ foodtrucksServ;
 
+	@Autowired
 	PiattiServ piattiServ;
 
 	
