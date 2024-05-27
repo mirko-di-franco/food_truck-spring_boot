@@ -155,8 +155,8 @@ public class MarchiController {
 		
 		
 		
-		@GetMapping("/{idMarchio}/piatti")
-		public String paginaModificaUtente(Model model, @RequestParam long idMarchio, @PathVariable("idMArchio") long idMArchio ) {
+		@GetMapping("/piatti/{idMarchio}")
+		public String paginaPiattiMarchio(Model model, @PathVariable("idMarchio") long idMarchio ) {
 			
 			List<Piatti> piatti = piattiServ.listaPiattiByIdMarchio(idMarchio);
 			model.addAttribute("piatti", piatti);
