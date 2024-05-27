@@ -36,4 +36,10 @@ public class MarchiServ {
 	}
 	
 	
+	//METODO ELIMINAZIONE MARCHIO
+	public void eliminaMarchio(Marchi marchio) {
+		marchiRepo.delete(marchio);
+	}
+	
+	
 }

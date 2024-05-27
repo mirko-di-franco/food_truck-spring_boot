@@ -413,7 +413,7 @@ a[data-toggle="collapse"] {
 						    </tr>
 						  </thead>
 						 <tbody>
-          <!-- ${utenti} si riferisce al model.addAttribute nel utentiController -->
+          <!-- ${marchi} si riferisce al model.addAttribute nel MarchiController -->
           <tr th:each="marchio : ${marchi}">
             <td th:text="${marchio.id}"></td>
             <td th:text="${marchio.nome}"></td>
@@ -423,14 +423,23 @@ a[data-toggle="collapse"] {
 				<img th:src="${marchio.logo}" alt="..." width="100">
 			</td>
             <td style="white-space:nowrap">
+
 				<a class="btn btn-primary btn-sm" th:href="@{/marchi/listaTrucks/}+${marchio.id}">Trucks</a>
 				<a class="btn btn-info btn-sm text-white" >Piatti</a>
               <a class="btn btn-warning btn-sm" >Modifica</a>
               <a class="btn btn-danger btn-sm"
                 onclick="return confirm('Sicuro di voler cancellare il prodotto?')">Elimina</a>
+
+				<a class="btn btn-primary btn-sm" >Trucks</a>
+				<a class="btn btn-info btn-sm text-white" th:href="@{/marchi/piatti/}+${marchio.id}">Piatti</a>
+              <a class="btn btn-warning btn-sm"  th:href="@{marchi/modificaMarchio(idMarchio=${marchio.id})}">Modifica</a>
+             <a class="btn btn-danger btn-sm" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal" th:data-id="${marchio.id}">
+			    Elimina
+			  </a>
+
             </td>
 
-            <!-- utenti.nomeVariabile che si trova nella classe Utenti -->
+            <!-- marchio.nomeVariabile che si trova nella classe Marchi -->
           </tr>
         </tbody>
 						</table>
@@ -445,11 +454,42 @@ a[data-toggle="collapse"] {
 		</div>
 
   
+  
+  	<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Conferma Eliminazione</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Sei sicuro di voler eliminare questo marchio?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+        <a id="confirmDeleteBtn" href="#" class="btn btn-danger">Elimina</a>
+      </div>
+    </div>
+  </div>
+</div>
+  
 
 	<script>
 		 setTimeout(function() {
 		      document.querySelector('.messaggioErrore').style.display = 'none';
 		  }, 3000);
+		  
+		  
+		   document.addEventListener('DOMContentLoaded', (event) => {
+    let deleteModal = document.getElementById('deleteModal');
+    deleteModal.addEventListener('show.bs.modal', function (event) {
+      let button = event.relatedTarget;
+      let marchioId = button.getAttribute('data-id');
+
+      let confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+      confirmDeleteBtn.href = 'marchi/eliminazione?idMarchio=' + marchioId;
+    });
+  });
 	</script>
 	
 
