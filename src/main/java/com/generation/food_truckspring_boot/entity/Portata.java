@@ -10,5 +10,10 @@ public enum Portata {
     CONTORNO,
     FRITTO,
     KEBAB,
-    POKE
+    POKE,
+    HOSOMAKI,
+    NIGIRI,
+    SASHIMI,
+    GUNKAN,
+    SALSE
 }
