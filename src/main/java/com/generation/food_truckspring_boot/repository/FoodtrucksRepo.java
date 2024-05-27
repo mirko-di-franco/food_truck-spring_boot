@@ -18,5 +18,7 @@ public interface FoodtrucksRepo extends JpaRepository<Foodtrucks, Long> {
 	
 	
 	
+	
+	
 		
 }
