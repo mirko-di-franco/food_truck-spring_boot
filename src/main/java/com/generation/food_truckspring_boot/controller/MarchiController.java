@@ -51,9 +51,10 @@ public class MarchiController {
 		
 		//-----------------------------------------------
 		//FORM CREAZIONE  TRUCK
-		@GetMapping("/nuovoTruck")
-		public String paginaNuovoTruck(Model model) {
+		@GetMapping("/nuovoTruck/{marchioId}")
+		public String paginaNuovoTruck(Model model,@PathVariable("marchioId")long marchioId) {
 			TruckDTO truckDTO = new TruckDTO();
+			truckDTO.setMarchioId(marchioId);
 			model.addAttribute("truckDTO", truckDTO);
 			return "marchi/creazioneTruck";
 		}
