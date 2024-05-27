@@ -365,7 +365,7 @@ a[data-toggle="collapse"] {
 	          <li>
 	              <a href="/utenti"><span class="fa fa-user mr-3"></span> Lista Utenti</a>
 	          </li>
-	          <li  class="active">
+	           <li class="active">
               <a href="/marchi"><span class="fa fa-briefcase mr-3"></span> Lista Marchi</a>
 	          </li>
 	          <li>
@@ -385,6 +385,9 @@ a[data-toggle="collapse"] {
         <!-- Page Content  -->
       <div id="content" class="p-4 p-md-5 pt-5">
 		  <h1>Lista Trucks</h1>
+		   <div class="text-end mx-4">
+		   <a class="btn btn-primary btn-md mb-3 ms-auto" th:href="@{/marchi/nuovoTruck}">Nuovo Truck</a>
+		  </div>
 		   <div th:if="${eliminazione} ">
 			    <div class="alert alert-success messaggioErrore" role="alert">
 			        <strong>Successo!</strong> <span th:text="${messaggio}"></span>
@@ -401,27 +404,30 @@ a[data-toggle="collapse"] {
 						<table class="table">
 						  <thead class="thead-primary">
 						    <tr>
-							    <th>Id</th>
+						    
+							    <th>id</th>
 							    <th>Nome</th>
 					            <th>Descrizione</th>
-					            <th>Indirizzo</th>
-					            <th>CoordinateGps</th>
-					            <th>Disponibilita </th>
+							    <th>Indirizzo</th>
+					            <th>Coordinate</th>
+					            <th>Disponibilita</th>
 					            <th>Immagine</th>
 					            <th>Azioni</th>
 						    </tr>
 						  </thead>
 						 <tbody>
           <!-- ${utenti} si riferisce al model.addAttribute nel utentiController -->
-          <tr th:each="truck : ${trucks}">
-            <td th:text="${truck.id}"></td>
-            <td th:text="${truck.nome}"></td>
-            <td th:text="${truck.descrizione}"></td>
-            <td th:text="${truck.indirizzo}"></td>
-            <td th:text="@{${truck.coordinateGps}}"></td>
-             <td th:text="${truck.disponibilita}"></td>
-             <td th:text="${truck.immagine}"></td>
+          <tr th:each="foodtruck : ${foodtrucks}">
+            <td th:text="${foodtruck.id}"></td>
+            <td th:text="${foodtruck.nome}"></td>
+            <td th:text="${foodtruck.descrizione}"></td>
+            <td th:text="${foodtruck.indirizzo}"></td>
+            <td th:text="${foodtruck.coordinateGps}"></td>
+            <td th:text="${foodtruck.disponibilita}"></td>
+            <td th:text="${foodtruck.immagine}"></td>
             <td style="white-space:nowrap">
+				
+				<a class="btn btn-info btn-sm text-white" >Piatti</a>
               <a class="btn btn-warning btn-sm" >Modifica</a>
               <a class="btn btn-danger btn-sm"
                 onclick="return confirm('Sicuro di voler cancellare il prodotto?')">Elimina</a>

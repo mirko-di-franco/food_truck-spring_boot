@@ -24,17 +24,17 @@ public class Foodtrucks {
 	 * @param descrizione
 	 * @param indirizzo
 	 * @param coordinateGps
-	 * @param disponibilità
+	 * @param disponibilita
 	 * @param immagine
 	 */
 	public Foodtrucks(long id, String nome, String descrizione, String indirizzo, String coordinateGps,
-			boolean disponibilità, String immagine) {
+			boolean disponibilita, String immagine) {
 		this.id = id;
 		this.nome = nome;
 		this.descrizione = descrizione;
 		this.indirizzo = indirizzo;
 		this.coordinateGps = coordinateGps;
-		this.disponibilità = disponibilità;
+		this.disponibilita = disponibilita;
 		this.immagine = immagine;
 	}
 	/**
@@ -54,7 +54,7 @@ public class Foodtrucks {
 	@Column(nullable = false)
 	private String coordinateGps;
 	@Column(nullable = false)
-	private boolean disponibilità;
+	private boolean disponibilita;
 	@Column(nullable = false)
 	private String immagine;
 	
@@ -114,11 +114,11 @@ public class Foodtrucks {
 	public void setCoordinateGps(String coordinateGps) {
 		this.coordinateGps = coordinateGps;
 	}
-	public boolean isDisponibilità() {
-		return disponibilità;
+	public boolean isDisponibilita() {
+		return disponibilita;
 	}
-	public void setDisponibilità(boolean disponibilità) {
-		this.disponibilità = disponibilità;
+	public void setDisponibilita(boolean disponibilita) {
+		this.disponibilita = disponibilita;
 	}
 	public String getImmagine() {
 		return immagine;

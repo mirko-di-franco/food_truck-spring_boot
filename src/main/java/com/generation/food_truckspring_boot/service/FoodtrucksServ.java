@@ -34,7 +34,11 @@ public class FoodtrucksServ {
 			return truck;
 		}
 
-		
+		//AGGIUNTA O MODIFICA truck
+		public Foodtrucks aggiuntaOModificaTruck(Foodtrucks truck) {
+			Foodtrucks foodtruck=foodtrucksRepo.save(truck);
+			return foodtruck;
+		}
 		
 	
 }

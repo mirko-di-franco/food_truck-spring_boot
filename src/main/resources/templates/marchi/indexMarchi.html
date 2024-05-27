@@ -423,7 +423,7 @@ a[data-toggle="collapse"] {
 				<img th:src="${marchio.logo}" alt="..." width="100">
 			</td>
             <td style="white-space:nowrap">
-				<a class="btn btn-primary btn-sm" >Trucks</a>
+				<a class="btn btn-primary btn-sm" th:href="@{/marchi/listaTrucks/}+${marchio.id}">Trucks</a>
 				<a class="btn btn-info btn-sm text-white" >Piatti</a>
               <a class="btn btn-warning btn-sm" >Modifica</a>
               <a class="btn btn-danger btn-sm"
