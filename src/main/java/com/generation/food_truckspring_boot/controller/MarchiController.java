@@ -154,7 +154,7 @@ public class MarchiController {
 		}
 		
 		
-		
+		//RESTITUISCE TUTTI I PIATTO PER ID DEL MARCHIO
 		@GetMapping("/piatti/{idMarchio}")
 		public String paginaPiattiMarchio(Model model, @PathVariable("idMarchio") long idMarchio ) {
 			
@@ -163,5 +163,15 @@ public class MarchiController {
 			
 			
 			return "marchi/listaPiattiMarchio";
+		}
+		
+		
+		//FORM CREAZIONE NUOVO PIATTO
+		@GetMapping("/nuovoPiatto/{idMarchio}")
+		public String paginaNuovoPiatto(Model model) {
+			MarchiDTO marchiDTO = new MarchiDTO();
+			model.addAttribute("marchiDTO", marchiDTO);
+			
+			return "marchi/creazioneMarchio";
 		}
 }
