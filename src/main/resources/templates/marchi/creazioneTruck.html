@@ -37,13 +37,13 @@
 						<p th:if="${#fields.hasErrors('descrizione')}" th:errorClass="text-danger" th:errors="${truckDTO.descrizione}"></p>
 					  </div>
 					  <!-- 3 -->
-					  <div class="col-md-4">
+					  <div class="col-md-6">
 					    <label for="inputAddress" class="form-label">indirizzo</label>
 					    <input type="form-control" class="form-control" th:text="${truckDTO.indirizzo}" name="indirizzo">
 							<p th:if="${#fields.hasErrors('indirizzo')}" th:errorClass="text-danger" th:errors="${truckDTO.indirizzo}"></p>
 					  </div>
 					  <!-- 4 -->
-					  <div class="col-md-4">
+					  <div class="col-md-6">
 					    <label for="disponibilita" class="form-label">disponibilita</label>
 					    <select class="form-select" th:field="${truckDTO.disponibilita}">
 								<option value="true">disponibile</option>
@@ -63,9 +63,10 @@
 					    <input class="form-control" th:field="${truckDTO.immagine}">
 							<p th:if="${#fields.hasErrors('immagine')}" th:errorClass="text-danger" th:errors="${truckDTO.immagine}"></p>
 					  </div>
-					  <div class="col-md-6">
-					    <label for="inputState" class="form-label">marchio id</label>
-					    <input class="form-control" th:field="${truckDTO.marchioId}">
+					  <div class="col-md-6 d-flex" style=" width: -webkit-fill-available; align-items: center;">
+					    <label for="inputState" class="form-label"style="text-wrap: nowrap; margin-right :20px; ">marchio id</label>
+					    <!-- todo marchioid si riferisce all'id del marchio, collegamento thymeleaf marchiController riga 57 -->
+					    <input class="form-control-plaintext bg-secondary bg-opacity-25 text-center rounded-3" th:field="*{marchioId}" readonly>
 							<p th:if="${#fields.hasErrors('marchioId')}" th:errorClass="text-danger" th:errors="${truckDTO.marchioId}"></p>
 					  </div>
 					 

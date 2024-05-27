@@ -386,7 +386,7 @@ a[data-toggle="collapse"] {
       <div id="content" class="p-4 p-md-5 pt-5">
 		  <h1>Lista Trucks</h1>
 		   <div class="text-end mx-4">
-		   <a class="btn btn-primary btn-md mb-3 ms-auto" th:href="@{/marchi/nuovoTruck}">Nuovo Truck</a>
+		   <a class="btn btn-primary btn-md mb-3 ms-auto" th:href="@{/marchi/nuovoTruck/}+${marchioId}">Nuovo Truck</a>
 		  </div>
 		   <div th:if="${eliminazione} ">
 			    <div class="alert alert-success messaggioErrore" role="alert">
