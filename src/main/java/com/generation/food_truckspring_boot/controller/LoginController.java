@@ -63,7 +63,7 @@ public class LoginController {
 			}
 			
 		}
-		
+		//REINDIRIZZA ALLA PAGINE HOME 
 		@GetMapping("/logout")
 		public String logout() {
 			
