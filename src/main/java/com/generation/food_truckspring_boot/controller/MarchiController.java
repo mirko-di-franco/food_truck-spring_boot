@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.generation.food_truckspring_boot.dto.MarchiDTO;
 import com.generation.food_truckspring_boot.entity.Marchi;
@@ -65,6 +66,83 @@ public class MarchiController {
 			marchio.setVideo(marchioDTO.getVideo());
 			
 			marchiServ.aggiuntaOModificaMarchio(marchio);
+			
+			return "redirect:/marchi";
+		}
+		
+		
+		@GetMapping("/modificaMarchio")
+		public String paginaModificaUtente(Model model, @RequestParam long idMarchio ) {
+			try {
+				Marchi marchio = marchiServ.ricercaMarchio(idMarchio).get();
+				model.addAttribute("marchio", marchio);
+				
+				MarchiDTO marchiDTO = new MarchiDTO();
+				
+				marchiDTO.setNome(marchio.getNome());
+				marchiDTO.setDescrizione(marchio.getDescrizione());
+				marchiDTO.setGenere(marchio.getGenere());
+				marchiDTO.setLogo(marchio.getLogo());
+				marchiDTO.setVideo(marchio.getVideo());
+				
+				model.addAttribute("marchiDTO", marchiDTO);
+				
+			}catch(Exception e) {
+				System.out.println("Exception: "+e.getMessage());
+				return "marchi/indexMarchi";
+			}
+			return "marchi/modificaMarchio";
+		}
+		
+		
+		
+		@PostMapping("/modificaMarchio")
+		public String modificaUtente(Model model, @RequestParam long idMarchio, @Valid @ModelAttribute MarchiDTO marchiDTO, BindingResult result) {
+			
+			try {
+				Marchi marchio = marchiServ.ricercaMarchio(idMarchio).get();
+				model.addAttribute("marchio", marchio);
+			
+				if(result.hasErrors()) {
+					return "marchio/modificaMarchio";
+				}
+				
+				
+				marchio.setNome(marchiDTO.getNome());
+				marchio.setDescrizione(marchiDTO.getDescrizione());
+				marchio.setGenere(marchiDTO.getGenere());
+				marchio.setLogo(marchiDTO.getLogo());
+				marchio.setVideo(marchiDTO.getVideo());
+				
+				marchiServ.aggiuntaOModificaMarchio(marchio);
+				
+			}catch(Exception e) {
+				System.out.println("Exception: "+e.getMessage());
+				System.err.println("marchio non trovato");
+			}
+			
+			//SE SONO RIUSCITO A MODIFICA ALLORA MANDO ALLA HOME DEGLI UTENTI
+			return "redirect:/marchi";
+			}
+		
+		
+		
+		@GetMapping("/eliminazione")
+		public String eliminazioneUtente(@RequestParam long idMarchio, Model model) {
+			try {
+				Marchi marchio = marchiServ.ricercaMarchio(idMarchio).get();
+				
+				marchiServ.eliminaMarchio(marchio);
+				 model.addAttribute("eliminazione", true);
+			     model.addAttribute("messaggio", "Marchio eliminato con successo!");
+				
+			}catch(Exception e) {
+				System.out.println("Errore: "+e.getMessage());
+				 model.addAttribute("eliminazione", false);
+			     model.addAttribute("messaggio", "Si è verificato un errore durante l'eliminazione del Marchio.");
+			    
+				 
+			}
 			
 			return "redirect:/marchi";
 		}
