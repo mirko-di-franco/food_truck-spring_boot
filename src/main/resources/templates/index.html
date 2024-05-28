@@ -359,7 +359,7 @@ a[data-toggle="collapse"] {
 				  </div>
 					<div style="width: 120px; height: 120px;">
 							  
-					<img src="./img/user.png" style="width: 100%; height: 100%; object-fit: cover;">
+					<img src="../static/img/user.png" style="width: 100%; height: 100%; object-fit: cover;">
 						  </div>
 			   
 			  </div>
@@ -376,7 +376,7 @@ a[data-toggle="collapse"] {
 				  </div>
 				  		<div style="width: 120px; height: 120px;">
 							  
-					<img src="./img/user.png" style="width: 100%; height: 100%; object-fit: cover;">
+					<img src="../static/img/user.png" style="width: 100%; height: 100%; object-fit: cover;">
 						  </div>
 			   
 			  </div>
@@ -393,7 +393,7 @@ a[data-toggle="collapse"] {
 				  </div>
 					<div style="width: 120px; height: 120px;">
 							  
-					<img src="./img/truck.png" style="width: 100%; height: 100%; object-fit: cover;">
+					<img src="../static/img/truck.png" style="width: 100%; height: 100%; object-fit: cover;">
 						  </div>
 			   
 			  </div>
@@ -402,9 +402,11 @@ a[data-toggle="collapse"] {
 		
 			</div>
       <hr style="color: #3545B4;">
+        <!--todo torta grafico-->
         <div class="row gap-5">
           <canvas id="myChart" style=" display: block; height: 400px !important; width: 1200px !important;" ></canvas>
         </div>
+        <!--todo fine torta grafico-->
       </div>
 			</div>
 			  
@@ -420,32 +422,83 @@ a[data-toggle="collapse"] {
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script>
-      var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-      var yValues = [55, 49, 44, 24, 15];
-      var barColors = [
-        "#b91d47",
-        "#00aba9",
-        "#2b5797",
-        "#e8c3b9",
-        "#1e7145"
-      ];
+
       
-      new Chart("myChart", {
+      // fetch per marchio e ordine 
+     let urlMarchi= "http://localhost:8080/api/marchi/nomeMarchi";
+     fetch(urlMarchi)
+     .then(data=>{
+      return data.json()
+      .then(post=>{
+        console.log(post);
+        post.forEach(element => {
+          let marchi=element.nomeMarchio;
+          let totaleOrdini=element.totaleOrdini;
+          let numeroOrdine=element.ordini;
+          // console.log(marchi);
+          // console.log(totaleOrdini);
+          // console.log(numeroOrdine);
+          //funzione
+          const marchiData=datiTorta(post);
+          
+
+          //grafico a torta
+          new Chart("myChart", {
         type: "doughnut",
         data: {
-          labels: xValues,
+          labels: marchiData.xValues,
           datasets: [{
-            backgroundColor: barColors,
-            data: yValues
+            backgroundColor: marchiData.barColors,
+            data: marchiData.yValues
           }]
         },
         options: {
           title: {
             display: true,
-            text: "World Wide Wine Production 2018"
+            text: "Marchi - Totale Ordini"
           }
         }
       });
+          
+          
+        });
+        
+      })
+    })
+    function datiTorta(post) {
+      
+      var xValues = [];
+      var yValues = [];
+      var barColors = [
+        "#b91d47",
+        "#00aba9",
+        "#2b5797",
+        "#e8c3b9",
+        "#1e7145",
+        "#ff7144"
+      ];
+      
+
+const groupedByCity = post.reduce((acc, { nomeMarchio, totaleOrdini }) => {
+  acc[nomeMarchio] = (acc[nomeMarchio] || 0) + totaleOrdini;
+  return acc;
+}, {});
+
+const result = Object.entries(groupedByCity).map(([nomeMarchio, sum]) => ({ nomeMarchio, sum }));
+console.log(result,"totale");
+
+
+      result.forEach(element => {
+        xValues.push(element.nomeMarchio);
+        console.log(xValues);
+        yValues.push(element.sum.toFixed(2));
+        console.log(yValues);
+      });
+      return {xValues,yValues,barColors}
+    }
+    
+      
+      
       </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
