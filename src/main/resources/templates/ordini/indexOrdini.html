@@ -387,18 +387,13 @@ a[data-toggle="collapse"] {
 
         <!-- Page Content  -->
       <div id="content" class="p-4 p-md-5 pt-5">
-		  <h1>Lista Marchi</h1>
+		  <h1>Lista Ordini</h1>
 		   <div class="text-end mx-4">
 		  
 		  </div>
-		   <div th:if="${eliminazione} ">
+			<div class="feedback d-none">
 			    <div class="alert alert-success messaggioErrore" role="alert">
-			        <strong>Successo!</strong> <span th:text="${messaggio}"></span>
-			    </div>
-		   </div>
-			<div th:unless="${eliminazione}">
-			    <div class="alert alert-danger messaggioErrore" role="alert">
-			        <strong>Errore!</strong> <span th:text="${messaggio}"></span>
+			        <strong>Ordine eliminato con successo!</strong>
 			    </div>
 			</div>
        		<div class="row">
@@ -467,21 +462,38 @@ a[data-toggle="collapse"] {
   
 
 	<script>
-		 setTimeout(function() {
-		      document.querySelector('.messaggioErrore').style.display = 'none';
-		  }, 3000);
-		  
-		  
-		   document.addEventListener('DOMContentLoaded', (event) => {
+	
+  		document.addEventListener('DOMContentLoaded', (event) => {
+    let ElFeedback = document.querySelector(".feedback");
     let deleteModal = document.getElementById('deleteModal');
-    deleteModal.addEventListener('show.bs.modal', function (event) {
-      let button = event.relatedTarget;
-      let marchioId = button.getAttribute('data-id');
+    let backModal = document.querySelector('.modal-backdrop');
 
-      let confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-      confirmDeleteBtn.href = 'marchi/eliminazione?idMarchio=' + marchioId;
+    deleteModal.addEventListener('show.bs.modal', function (event) {
+        let button = event.relatedTarget;
+        let marchioId = button.getAttribute('data-id');
+
+        let confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+        //confirmDeleteBtn.href = "/ordini";
+        confirmDeleteBtn.addEventListener("click", mostraFeedback);
     });
-  });
+
+    function mostraFeedback(event) {
+        event.preventDefault();
+
+        deleteModal.classList.remove("show");
+        deleteModal.style.display = 'none';
+
+        let backdrops = document.querySelectorAll('.modal-backdrop');
+        backdrops.forEach(backdrop => {
+            backdrop.remove();
+        });
+
+        ElFeedback.classList.remove("d-none");
+        setTimeout(function() {
+            location.reload();
+        }, 1000);
+    }
+});
 	</script>
 	
 

@@ -6,7 +6,7 @@
     <title>Pannello di Controllo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"  crossorigin="anonymous">
 
 <style>
 
@@ -344,6 +344,10 @@ a[data-toggle="collapse"] {
   max-height: calc(100% - 40px); 
 }
 
+td i{
+	cursor: pointer;
+}
+
 </style>
 
 </head>
@@ -422,7 +426,9 @@ a[data-toggle="collapse"] {
             <td th:text="${truck.descrizione}"></td>
             <td th:text="${truck.indirizzo}"></td>
             <td th:text="@{${truck.coordinateGps}}"></td>
-             <td th:text="${truck.disponibilita}"></td>
+             <td class="disponibilita text-center" th:id="${'truck_' + truck.id}"  onclick="aggiornamentoVisibilita(this)">
+    			<i th:class="${truck.disponibilita ? 'fas fa-eye text-success' : 'fas fa-eye-slash text-danger'}"></i>
+			</td>
              <td th:text="${truck.immagine}"></td>
             <td style="white-space:nowrap">
               <a class="btn btn-warning btn-sm" >Modifica</a>
@@ -450,6 +456,40 @@ a[data-toggle="collapse"] {
 		 setTimeout(function() {
 		      document.querySelector('.messaggioErrore').style.display = 'none';
 		  }, 3000);
+		  
+		  
+		  function aggiornamentoVisibilita(td){
+			  /*
+			  perchè THYMELEAF, mi sono ucciso per riuscire a prendere l'id in modo dinamico,
+			  ho chiesto aiuto anche al signor balduino(Baeldung) ma male male. RICORDARSI A VITA QUESTA
+			  SOLUZIONE
+			  */
+			  
+			  
+			   let truckId = td.id.replace('truck_', '');
+			  console.log(truckId, "id truck")
+			  fetch("api/foodtrucks/" + truckId + "/disponibilita",{
+				  method: 'PUT',
+				  headers: {
+					  'Content-Type': 'application/json'
+				  }
+			  })
+			  .then(response => {
+				  return response.json();
+				  
+			  })
+			  .then(data => {
+				  console.log(data);
+				  let tdDisponibilita = document.getElementById("truck_"+truckId);
+				  if(data.disponibilita){
+				   tdDisponibilita.innerHTML = '<i class="fas fa-eye text-success"></i>';
+					  
+				  }else{
+					   tdDisponibilita.innerHTML = '<i class="fas fa-eye-slash text-danger"></i>';
+				  }
+			  })
+			  
+		  }
 	</script>
 	
 

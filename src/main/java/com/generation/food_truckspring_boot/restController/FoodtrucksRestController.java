@@ -9,10 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.generation.food_truckspring_boot.dto.TrucksMarchioDTO;
+import com.generation.food_truckspring_boot.dto.VisibilitaTruck;
 import com.generation.food_truckspring_boot.entity.Foodtrucks;
 import com.generation.food_truckspring_boot.entity.Marchi;
 import com.generation.food_truckspring_boot.repository.FoodtrucksRepo;
@@ -106,5 +108,19 @@ public class FoodtrucksRestController {
 		 List<Foodtrucks> trucks = foodtrucksServ.listaTrucks();
 		 return trucks;
  	 }
+	 
+	 
+	 //CAMBIO VISIBILITA
+	 @PutMapping("/{idTruck}/disponibilita")
+	 public ResponseEntity<VisibilitaTruck> modificaVisibilita(@PathVariable("idTruck") long idTruck){
+		 try {
+			 boolean newVisibilita = foodtrucksServ.aggiornaVisibilita(idTruck);
+			 VisibilitaTruck visibilitaOggetto = new VisibilitaTruck();
+			 visibilitaOggetto.setDisponibilita(newVisibilita);
+			 return ResponseEntity.ok(visibilitaOggetto);
+		 }catch(Exception e) {
+			 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		 }
+	 }
 
 }

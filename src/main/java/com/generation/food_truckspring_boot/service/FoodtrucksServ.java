@@ -1,6 +1,7 @@
 package com.generation.food_truckspring_boot.service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,25 @@ public class FoodtrucksServ {
 			Foodtrucks foodtruck=foodtrucksRepo.save(truck);
 			return foodtruck;
 		}
+		
+		
+		
+	 //CAMBIO VISIBILITA TRUCK
+	 public boolean aggiornaVisibilita(long idTruck) {
+		 Optional<Foodtrucks> truckOptional = foodtrucksRepo.findById(idTruck);
+		 if(truckOptional.isEmpty()) {
+			 //lancio un eccezione se non trovo il truck
+			 throw new NoSuchElementException("truck non trovato");
+		 }else {
+			 Foodtrucks truck = truckOptional.get();
+			 boolean newVisibilita = !truck.isDisponibilita();
+			 truck.setDisponibilita(newVisibilita);
+			 
+			 Foodtrucks truckAggiornato = foodtrucksRepo.save(truck);
+			 return newVisibilita;
+		 }
+		 
+	 }
 		
 	
 }
