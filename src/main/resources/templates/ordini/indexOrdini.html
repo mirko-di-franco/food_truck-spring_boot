@@ -354,25 +354,24 @@ a[data-toggle="collapse"] {
 
 
 		<div class="wrapper d-flex align-items-stretch">
-      <!-- <div th:insert="~{fragments/sidebar}"></div> -->
 			<nav id="sidebar">
 			
 				<div class="p-4">
 		  		<h1><a href="index.html" class="logo">TruckWaY <span>Pannello Amministratore</span></a></h1>
 	        <ul class="list-unstyled components mb-5">
 	          <li>
-	            <a href="/home"><span class="fa fa-home mr-3"></span> Home</a>
+	            <a href="/home"><span lass="fa fa-home mr-3"></span> Home</a>
 	          </li>
 	          <li>
 	              <a href="/utenti"><span class="fa fa-user mr-3"></span> Lista Utenti</a>
 	          </li>
-	          <li class="active">
+	           <li>
               <a href="/marchi"><span class="fa fa-briefcase mr-3"></span> Lista Marchi</a>
 	          </li>
 	          <li>
               <a href="/trucks"><span class="fa fa-sticky-note mr-3"></span> Lista Trucks</a>
 	          </li>
-	          <li>
+	          <li class="active">
               <a href="/ordini"><span class="fa fa-sticky-note mr-3"></span> Lista Ordini</a>
 	          </li>
 	        </ul>
@@ -388,10 +387,9 @@ a[data-toggle="collapse"] {
 
         <!-- Page Content  -->
       <div id="content" class="p-4 p-md-5 pt-5">
-		  <h1>Lista Piatti</h1>
-		  <div class="text-end mx-4">
-			  
-		   <a class="btn btn-primary btn-md mb-3 ms-auto" th:href="@{utenti/nuovoUtente}">Nuovo Piatto</a>
+		  <h1>Lista Marchi</h1>
+		   <div class="text-end mx-4">
+		  
 		  </div>
 		   <div th:if="${eliminazione} ">
 			    <div class="alert alert-success messaggioErrore" role="alert">
@@ -410,35 +408,30 @@ a[data-toggle="collapse"] {
 						  <thead class="thead-primary">
 						    <tr>
 							    <th>Id</th>
-							    <th>Nome</th>
-					            <th>Descrizione</th>
-					            <th>Alimentazione</th>
-					            <th>Portata</th>
-					            <th>Immagine</td>
-					            <th>Prezzo Listino</th>
+							    <th>Data Ordine</th>
+					            <th>Piatti Ordinati</th>
+					            <th>Totale Ordine</th>
 					            <th>Azioni</th>
 						    </tr>
 						  </thead>
 						 <tbody>
-          <!-- ${utenti} si riferisce al model.addAttribute nel utentiController -->
-          <tr th:each="piatto : ${piatti}">
-            <td th:text="${piatto.id}"></td>
-            <td th:text="${piatto.nome}"></td>
-            <td th:text="${piatto.descrizione}"></td>
-            <td th:text="${piatto.alimentazione}"></td>
-            <td th:text="@{${piatto.portata}}"></td>
-            <td>
-				<img th:src="${piatto.immagine}" alt="..." width="100">
-			</td>
-            <td th:text="@{${piatto.prezzoListino}+ '€'}"></td>
+          <!-- ${marchi} si riferisce al model.addAttribute nel MarchiController -->
+          <tr th:each="ordine : ${ordini}">
+            <td th:text="${ordine.id}"></td>
+            <td th:text="${ordine.data_ordine}"></td>
+             <td>
+				 <img th:each="piatto : ${ordine.piatti}" th:src="${piatto.immagine}" alt="..." width="100">
+			 </td>
+			 <td th:text="@{${ordine.totale_ordine} + '€' }"></td>
             <td style="white-space:nowrap">
-			  <a class="btn btn-warning btn-sm" href="#">Modifica</a>
-			  <a class="btn btn-danger btn-sm" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal" >
+
+             <a class="btn btn-danger btn-sm" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal" th:data-id="${ordine.id}">
 			    Elimina
 			  </a>
-			</td>
 
-            <!-- utenti.nomeVariabile che si trova nella classe Utenti -->
+            </td>
+
+            <!-- marchio.nomeVariabile che si trova nella classe Marchi -->
           </tr>
         </tbody>
 						</table>
@@ -451,8 +444,10 @@ a[data-toggle="collapse"] {
        	
       </div>
 		</div>
-		
-		<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+
+  
+  
+  	<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -460,7 +455,7 @@ a[data-toggle="collapse"] {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Sei sicuro di voler eliminare questo utente?
+        Sei sicuro di voler eliminare questo marchio?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
@@ -469,7 +464,6 @@ a[data-toggle="collapse"] {
     </div>
   </div>
 </div>
-
   
 
 	<script>
@@ -482,10 +476,10 @@ a[data-toggle="collapse"] {
     let deleteModal = document.getElementById('deleteModal');
     deleteModal.addEventListener('show.bs.modal', function (event) {
       let button = event.relatedTarget;
-      let userId = button.getAttribute('data-id');
+      let marchioId = button.getAttribute('data-id');
 
       let confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-      confirmDeleteBtn.href = 'utenti/eliminazione?idUtente=' + userId;
+      confirmDeleteBtn.href = 'marchi/eliminazione?idMarchio=' + marchioId;
     });
   });
 	</script>
