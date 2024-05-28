@@ -99,5 +99,12 @@ public class FoodtrucksRestController {
 		 return truck.get();
 	 }
 	*/
+	 
+	 
+	 @GetMapping("/trucks")
+	 public List<Foodtrucks> listaSoloTrucks(){
+		 List<Foodtrucks> trucks = foodtrucksServ.listaTrucks();
+		 return trucks;
+ 	 }
 
 }
