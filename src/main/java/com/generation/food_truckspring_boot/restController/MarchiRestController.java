@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.generation.food_truckspring_boot.dto.NomeMarchiDTO;
 import com.generation.food_truckspring_boot.dto.TruckPiattiDTO;
 import com.generation.food_truckspring_boot.entity.Foodtrucks;
 import com.generation.food_truckspring_boot.entity.Genere;
@@ -31,12 +32,31 @@ public class MarchiRestController {
 	@Autowired
 	FoodtrucksServ foodtruckServ;
 	
+//	@Autowired
+//	MarchiRepo marchiRepo;
+	
 	
 	@GetMapping
 	public List<Marchi> getAll(){
 		List<Marchi> marchi = marchiServ.listaMarchi();
 		return marchi;
 	}
+	
+	
+	//_____________________________________
+//	@GetMapping("listaMarchiNome")
+//	public List<Marchi> ricercaNome(){
+//		List<Marchi>nomeMarchi=marchiRepo.findByNome();
+//		return nomeMarchi;
+//	}
+	@GetMapping("/nomeMarchi")
+	public List<NomeMarchiDTO>nomeMarchio(){
+		List<NomeMarchiDTO>nomeMarchiDTOs=marchiServ.nomeMarchioooo();
+		return nomeMarchiDTOs;
+	}
+	
+	
+	//_____________________________________
 	
 	
 	@GetMapping("/{idMarchio}")

@@ -36,4 +36,15 @@ public class IndexCtrl {
 		model.addAttribute("utente",user);
 		return "index";
 	}
+	@RequestMapping("/utenti")
+	public String utenti( Model model) { 
+		//user non serve se si usa session.getAttribute("user") 
+		// lo user viene inserito AUTOMATICAMENTE nel model per il template
+		// non è necessario aggiungerlo a mano
+		//model.addAttribute(user)); non serve	
+		
+		Utenti user=(Utenti) httpSession.getAttribute("utente");
+		model.addAttribute("utente",user);
+		return "utenti";
+	}
 }
