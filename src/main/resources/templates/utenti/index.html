@@ -430,7 +430,7 @@ a[data-toggle="collapse"] {
             <td th:text="@{${utente.ruolo}}"></td>
             <td style="white-space:nowrap">
 			  <a class="btn btn-warning btn-sm" th:href="@{utenti/modificaUtente(idUtente=${utente.id})}">Modifica</a>
-			  <a class="btn btn-danger btn-sm" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal" th:data-id="${utente.id}">
+			  <a class="btn btn-danger btn-sm" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal" th:id="${utente.id}" th:data-id="${utente.id}" >
 			    Elimina
 			  </a>
 			</td>
@@ -470,48 +470,51 @@ a[data-toggle="collapse"] {
   
 
 	<script>
-		 setTimeout(function() {
-		      document.querySelector('.messaggioErrore').style.display = 'none';
-		  }, 3000);
-		  
-		  
-		   document.addEventListener('DOMContentLoaded', (event) => {
+		 
+  
+  document.addEventListener('DOMContentLoaded', (event) => {
     let deleteModal = document.getElementById('deleteModal');
-    
+    let confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
     let ElFeedback = document.querySelector(".feedback");
-	let backModal = document.querySelector('.modal-backdrop');
-
-   
+    
     deleteModal.addEventListener('show.bs.modal', function (event) {
-      let button = event.relatedTarget;
-      let userId = button.getAttribute('data-id');
-
-      let confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-      confirmDeleteBtn.href = 'utenti/eliminazione?idUtente=' + userId;
-      confirmDeleteBtn.addEventListener("click", mostraFeedback);
-      
+        let button = event.relatedTarget;
+        let userId = button.getAttribute('data-id');
+        confirmDeleteBtn.setAttribute('data-id', userId);
     });
     
-    function mostraFeedback(event) {
-          event.preventDefault();
+    confirmDeleteBtn.addEventListener("click", function(event) {
+        event.preventDefault();
+        let userId = this.getAttribute('data-id');
+        fetch("api/utenti/" + userId, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            // Mostra il feedback
+            deleteModal.classList.remove("show");
+            deleteModal.style.display = 'none';
 
-          deleteModal.classList.remove("show");
-          deleteModal.style.display = 'none';
-          console.log("sono dentro");
+            let backdrops = document.querySelectorAll('.modal-backdrop');
+            backdrops.forEach(backdrop => {
+                backdrop.remove();
+            });
 
-          let backdrops = document.querySelectorAll('.modal-backdrop');
-          backdrops.forEach(backdrop => {
-              backdrop.remove();
-          });
-
-          ElFeedback.classList.remove("d-none");
-          setTimeout(function() {
-              location.reload();
-          }, 1000);
-      }
-
+            ElFeedback.classList.remove("d-none");
+            setTimeout(function() {
+                location.reload();
+            }, 1000);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+});
   
-  });
 	</script>
 	
 
