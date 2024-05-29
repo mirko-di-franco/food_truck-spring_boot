@@ -474,11 +474,15 @@ td i{
 
 	<script>
 		let Elvisibilita = document.querySelector(".feedback-visibilita");
-		let icona = document.querySelector(".icona");
+		let icona = document.querySelectorAll(".icona");
 		console.log(icona, "icona");
 		console.log(Elvisibilita, "feed")
 		
-		icona.addEventListener("click", feedbackVisibilita);
+		//icona.addEventListener("click", feedbackVisibilita);
+		
+		icona.forEach(btn => {
+			btn.addEventListener("click", feedbackVisibilita);
+		})
 		
 		//FUNZIONE FEEDBACK VISIBILITA
 		function feedbackVisibilita(){
