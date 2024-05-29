@@ -375,9 +375,11 @@ a[data-toggle="collapse"] {
               <a href="/ordini"><span class="fa fa-sticky-note mr-3"></span> Lista Ordini</a>
 	          </li>
 	        </ul>
+         <!-- 
           <form action="/logout" method="POST">
             <input type="submit" class="btn btn-danger" value="Logout">
-            </form>
+            </form> -->
+            <a href="http://127.0.0.1:5500/ProjectWork/index.html" class="btn btn-danger">Sito Web</a>
 	    
 
 	  
@@ -391,16 +393,6 @@ a[data-toggle="collapse"] {
 		   <div class="text-end mx-4">
 		   <a class="btn btn-primary btn-md mb-3 ms-auto" th:href="@{marchi/nuovoMarchio}">Nuovo Marchio</a>
 		  </div>
-		   <div th:if="${eliminazione} ">
-			    <div class="alert alert-success messaggioErrore" role="alert">
-			        <strong>Successo!</strong> <span th:text="${messaggio}"></span>
-			    </div>
-		   </div>
-			<div th:unless="${eliminazione}">
-			    <div class="alert alert-danger messaggioErrore" role="alert">
-			        <strong>Errore!</strong> <span th:text="${messaggio}"></span>
-			    </div>
-			</div>
        		<div class="row">
 				<div class="col-md-12">
 					<div class="table-wrap">
