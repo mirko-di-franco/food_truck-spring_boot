@@ -15,5 +15,7 @@ public enum Portata {
     NIGIRI,
     SASHIMI,
     GUNKAN,
-    SALSE
+    SALSE,
+    ROSSE,
+    BIANCHE
 }

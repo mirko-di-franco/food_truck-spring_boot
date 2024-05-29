@@ -370,7 +370,7 @@ a[data-toggle="collapse"] {
               <a href="/marchi"><span class="fa fa-briefcase mr-3"></span> Lista Marchi</a>
 	          </li>
 	          <li>
-              <a href="/trucks"><span class="fa fa-sticky-note mr-3"></span> Lista Trucks</a>
+              <a href="/trucks"><span class="fa-solid fa-truck"></span> Lista Trucks</a>
 	          </li>
 	          <li class="active">
               <a href="/ordini"><span class="fa fa-sticky-note mr-3"></span> Lista Ordini</a>
@@ -420,7 +420,7 @@ a[data-toggle="collapse"] {
 			 </td>
 			 <td th:text="@{${ordine.totale_ordine} + '€' }"></td>
             <td style="white-space:nowrap">
-
+			<a class="btn btn-warning btn-sm">Modifica</a>
              <a class="btn btn-danger btn-sm" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal" th:data-id="${ordine.id}">
 			    Elimina
 			  </a>

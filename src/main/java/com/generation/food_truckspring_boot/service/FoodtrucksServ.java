@@ -59,6 +59,11 @@ public class FoodtrucksServ {
 		 }
 		 
 	 }
+
+	public void eliminaTruck(Foodtrucks truck) {
+		foodtrucksRepo.delete(truck);
+		
+	}
 		
 	
 }

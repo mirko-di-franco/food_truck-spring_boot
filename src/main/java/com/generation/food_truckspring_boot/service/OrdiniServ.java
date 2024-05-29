@@ -3,6 +3,7 @@ package com.generation.food_truckspring_boot.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.generation.food_truckspring_boot.entity.Ordini;
@@ -18,7 +19,7 @@ public class OrdiniServ {
 
 	//LISTA TUTTI GLI ORDINI
 	public List<Ordini> listaOrdini(){
-		List<Ordini> ordini = ordiniRepo.findAll();
+		List<Ordini> ordini = ordiniRepo.findAll(Sort.by(Sort.Direction.DESC, "id"));
 		return ordini;
 	}
 	

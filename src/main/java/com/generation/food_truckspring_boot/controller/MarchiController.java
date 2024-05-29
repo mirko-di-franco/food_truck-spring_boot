@@ -98,7 +98,88 @@ public class MarchiController {
 			return "redirect:/marchi/listaTrucks/"+truckDTO.getMarchioId();
 		}
 		
-		//-----------------------------------------------
+		
+		//------------------------------------FORM MODIFICA TRUCK--------------------
+		@GetMapping("/modificaTruck")
+		public String modificaTruck(Model model, @RequestParam long idTruck ) {
+			try {
+				Foodtrucks truck = foodtrucksServ.truckPerId(idTruck).get();
+				model.addAttribute("truck", truck);
+				
+				TruckDTO truckDTO = new TruckDTO();
+				
+				truckDTO.setNome(truck.getNome());
+				truckDTO.setDescrizione(truck.getDescrizione());
+				truckDTO.setIndirizzo(truck.getIndirizzo());
+				truckDTO.setCoordinateGps(truck.getCoordinateGps());
+				truckDTO.setDisponibilita(truck.isDisponibilita());
+				truckDTO.setImmagine(truck.getImmagine());
+				truckDTO.setMarchioId(truck.getMarchi().getId());
+				
+				model.addAttribute("truckDTO", truckDTO);
+				
+			}catch(Exception e) {
+				System.out.println("Exception: "+e.getMessage());
+				return "marchi/indexMarchi";
+			}
+			return "marchi/modificaTruck";
+		}
+		
+		
+		
+		@PostMapping("/modificaTruck")
+		public String modificaTruck(Model model, @RequestParam long idTruck, @Valid @ModelAttribute TruckDTO truckDTO, BindingResult result) {
+			
+			try {
+				Foodtrucks truck = foodtrucksServ.truckPerId(idTruck).get();
+				model.addAttribute("truck", truck);
+			
+				if(result.hasErrors()) {
+					return "marchio/modificaMarchio";
+				}
+				
+				
+				truck.setNome(truckDTO.getNome());
+				truck.setDescrizione(truckDTO.getDescrizione());
+				truck.setIndirizzo(truckDTO.getIndirizzo());
+				truck.setCoordinateGps(truckDTO.getCoordinateGps());
+				truck.setDisponibilita(truckDTO.isDisponibilita());
+				truck.setImmagine(truckDTO.getImmagine());
+				
+				
+				foodtrucksServ.aggiuntaOModificaTruck(truck);
+				
+			}catch(Exception e) {
+				System.out.println("Exception: "+e.getMessage());
+				System.err.println("truck non trovato");
+			}
+			
+			//SE SONO RIUSCITO A MODIFICA ALLORA MANDO ALLA HOME DEGLI UTENTI
+			return "redirect:/marchi";
+			}
+		
+		//ELIMINAZIONE TRUCK
+		
+		@GetMapping("/eliminazioneTruck")
+		public String eliminazioneTruck(@RequestParam long idTruck, Model model) {
+			try {
+				Foodtrucks truck = foodtrucksServ.truckPerId(idTruck).get();
+				
+				foodtrucksServ.eliminaTruck(truck);
+				 model.addAttribute("eliminazione", true);
+			     model.addAttribute("messaggio", "Piatto eliminato con successo!");
+				
+			}catch(Exception e) {
+				System.out.println("Errore: "+e.getMessage());
+				 model.addAttribute("eliminazione", false);
+			     model.addAttribute("messaggio", "Si è verificato un errore durante l'eliminazione del Piatto.");
+			    
+				 
+			}
+			
+			return "redirect:/marchi";
+		}
+		//----------------------------------------------------------------------------
 		
 		
 		//FORM CREAZIONE MARCHIO
@@ -291,4 +372,63 @@ public class MarchiController {
 				}
 				
 				//-----------------------------------------------
+				
+				//MODIFICA PIATTO
+				@GetMapping("/modificaPiatto")
+				public String paginaModificaPiatto(Model model, @RequestParam long idPiatto ) {
+					try {
+						Piatti piatto = piattiServ.piattoPerId(idPiatto).get();
+						model.addAttribute("piatto", piatto);
+						
+						PiattoDTO piattoDTO = new PiattoDTO();
+						
+						piattoDTO.setNome(piatto.getNome());
+						piattoDTO.setDescrizione(piatto.getDescrizione());
+						piattoDTO.setImmagine(piatto.getImmagine());
+						piattoDTO.setAlimentazione(piatto.getAlimentazione());
+						piattoDTO.setPrezzoListino(piatto.getPrezzoListino());
+						piattoDTO.setPortata(piatto.getPortata());
+						piattoDTO.setMarchioId(piatto.getMarchi().getId());
+						
+						
+						model.addAttribute("piattoDTO", piattoDTO);
+						
+					}catch(Exception e) {
+						System.out.println("Exception: "+e.getMessage());
+						return "marchi/indexMarchi";
+					}
+					return "marchi/modificaPiatto";
+				}
+				
+				
+				
+				@PostMapping("/modificaPiatto")
+				public String modificaPiatto(Model model, @RequestParam long idPiatto, @Valid @ModelAttribute PiattoDTO piattoDTO, BindingResult result) {
+					
+					try {
+						Piatti piatto = piattiServ.piattoPerId(idPiatto).get();
+						model.addAttribute("piatto", piatto);
+					
+						if(result.hasErrors()) {
+							return "marchi/modificaPiatto";
+						}
+						
+						
+						piatto.setNome(piattoDTO.getNome());
+						piatto.setDescrizione(piattoDTO.getDescrizione());
+						piatto.setImmagine(piattoDTO.getImmagine());
+						piatto.setAlimentazione(piattoDTO.getAlimentazione());
+						piatto.setPrezzoListino(piattoDTO.getPrezzoListino());
+						piatto.setPortata(piattoDTO.getPortata());
+						
+						piattiServ.aggiungiModificaPiatti(piatto);
+						
+					}catch(Exception e) {
+						System.out.println("Exception: "+e.getMessage());
+						System.err.println("marchio non trovato");
+					}
+					
+					//SE SONO RIUSCITO A MODIFICA ALLORA MANDO ALLA HOME DEGLI UTENTI
+					return "redirect:/marchi";
+					}
 }
