@@ -430,7 +430,7 @@ a[data-toggle="collapse"] {
             <td th:text="${foodtruck.immagine}"></td>
             <td style="white-space:nowrap">
 				
-				<a class="btn btn-info btn-sm text-white" >Piatti</a>
+				<a class="btn btn-info btn-sm text-white" th:href="@{/marchi/piatti/}+${marchioId}">Piatti</a>
               <a class="btn btn-warning btn-sm" >Modifica</a>
               <a class="btn btn-danger btn-sm"
                 onclick="return confirm('Sicuro di voler cancellare il prodotto?')">Elimina</a>

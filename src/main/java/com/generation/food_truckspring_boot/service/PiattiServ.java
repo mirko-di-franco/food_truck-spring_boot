@@ -26,4 +26,16 @@ public class PiattiServ {
 		List<Piatti> piatti = piattiRepo.findByMarchiId(idMarchio);
 		return piatti;
 	}
+	
+	//salva aggiungi piatti 
+	public Piatti aggiungiModificaPiatti(Piatti piatto) {
+		Piatti nuovoPiatto=piattiRepo.save(piatto);
+		return nuovoPiatto;
+	}
+	
+	
+	//eliminazione piatto
+	public void eliminaPiatto(Piatti piatto) {
+		piattiRepo.delete(piatto);
+	}
 }

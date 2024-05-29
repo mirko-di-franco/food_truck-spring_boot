@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.generation.food_truckspring_boot.dto.MarchiDTO;
+import com.generation.food_truckspring_boot.dto.PiattoDTO;
 import com.generation.food_truckspring_boot.dto.TruckDTO;
 import com.generation.food_truckspring_boot.entity.Foodtrucks;
 import com.generation.food_truckspring_boot.entity.Marchi;
@@ -210,6 +211,7 @@ public class MarchiController {
 			return "redirect:/marchi";
 		}
 		
+		//---------------------PIATTI-------------------------------//
 		
 		//RESTITUISCE TUTTI I PIATTO PER ID DEL MARCHIO
 		@GetMapping("/piatti/{idMarchio}")
@@ -222,13 +224,71 @@ public class MarchiController {
 			return "marchi/listaPiattiMarchio";
 		}
 		
-		
+		//-----------------------------------------------
 		//FORM CREAZIONE NUOVO PIATTO
 		@GetMapping("/nuovoPiatto/{idMarchio}")
-		public String paginaNuovoPiatto(Model model) {
-			MarchiDTO marchiDTO = new MarchiDTO();
-			model.addAttribute("marchiDTO", marchiDTO);
+		public String paginaNuovoPiatto(Model model,@PathVariable("idMarchio") long marchioId) {
+			PiattoDTO piattoDTO = new PiattoDTO();
+			piattoDTO.setMarchioId(marchioId);
+			model.addAttribute("piattoDTO", piattoDTO);
 			
-			return "marchi/creazioneMarchio";
+			return "marchi/creazionePiatto";
 		}
+
+				
+				@PostMapping("/nuovoPiatto")
+				//@valid : esegue la validazione di TRUCKDTO utilizzando le annotazioni di validazione presenti nella classe TRUCKDTO, come @NotNull, @Size
+				//@ModelAttribute: Spring cerca di legare i dati del form (o altri parametri della richiesta) a un'istanza di TRUCKDTO.
+				//@BindingResult: contiene i risultati della validazione di truckDTO. Può essere usato per verificare se ci sono stati errori di binding o di validazione.
+				public String nuovoPiatto(@Valid @ModelAttribute PiattoDTO piattoDTO, BindingResult result) {
+					
+					if(result.hasErrors()) {
+						return "marchi/creazionePiatto";
+					}
+					Optional<Marchi> marchio=marchiServ.ricercaMarchio(piattoDTO.getMarchioId());
+					 if (!marchio.isPresent()) {
+					        // Aggiungi un messaggio di errore personalizzato al BindingResult
+					        result.rejectValue("marchioId", "error.truckDTO", "Il marchio con l'ID specificato non esiste.");
+					        return "marchi/creazionePiatto";
+					    }
+					
+					Piatti piatto = new Piatti();
+					piatto.setNome(piattoDTO.getNome());
+					piatto.setDescrizione(piattoDTO.getDescrizione());
+					piatto.setImmagine(piattoDTO.getImmagine());
+					piatto.setAlimentazione(piattoDTO.getAlimentazione());
+					piatto.setPrezzoListino(piattoDTO.getPrezzoListino());
+					piatto.setPortata(piattoDTO.getPortata());
+					piatto.setMarchi(marchio.get());
+					
+					
+					piattiServ.aggiungiModificaPiatti(piatto);
+					
+					
+					return "redirect:/marchi/piatti/"+piattoDTO.getMarchioId();
+				}
+				
+				//ELIMINAZIONE PIATTO
+				
+				@GetMapping("/eliminazionePiatto")
+				public String eliminazionePiatto(@RequestParam long idPiatto, Model model) {
+					try {
+						Piatti piatto = piattiServ.piattoPerId(idPiatto).get();
+						
+						piattiServ.eliminaPiatto(piatto);
+						 model.addAttribute("eliminazione", true);
+					     model.addAttribute("messaggio", "Piatto eliminato con successo!");
+						
+					}catch(Exception e) {
+						System.out.println("Errore: "+e.getMessage());
+						 model.addAttribute("eliminazione", false);
+					     model.addAttribute("messaggio", "Si è verificato un errore durante l'eliminazione del Piatto.");
+					    
+						 
+					}
+					
+					return "redirect:/marchi";
+				}
+				
+				//-----------------------------------------------
 }
