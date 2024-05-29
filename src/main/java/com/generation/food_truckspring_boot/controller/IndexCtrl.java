@@ -5,8 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.generation.food_truckspring_boot.entity.Utenti;
-
 import jakarta.servlet.http.HttpSession;
 
 
@@ -32,8 +30,8 @@ public class IndexCtrl {
 		// non è necessario aggiungerlo a mano
 		//model.addAttribute(user)); non serve	
 		
-		Utenti user=(Utenti) httpSession.getAttribute("utente");
-		model.addAttribute("utente",user);
+//		Utenti user=(Utenti) httpSession.getAttribute("utente");
+//		model.addAttribute("utente",user);
 		return "index";
 	}
 	@RequestMapping("/utenti")
@@ -43,8 +41,8 @@ public class IndexCtrl {
 		// non è necessario aggiungerlo a mano
 		//model.addAttribute(user)); non serve	
 		
-		Utenti user=(Utenti) httpSession.getAttribute("utente");
-		model.addAttribute("utente",user);
+//		Utenti user=(Utenti) httpSession.getAttribute("utente");
+//		model.addAttribute("utente",user);
 		return "utenti";
 	}
 }

@@ -432,7 +432,7 @@ a[data-toggle="collapse"] {
 			</td>
             <td th:text="@{${piatto.prezzoListino}+ '€'}"></td>
             <td style="white-space:nowrap">
-			  <a class="btn btn-warning btn-sm" href="#">Modifica</a>
+			  <a class="btn btn-warning btn-sm"  th:href="@{/marchi/modificaPiatto(idPiatto=${piatto.id})}">Modifica</a>
 			  <a class="btn btn-danger btn-sm" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal" th:data-id="${piatto.id}">
 			    Elimina
 			  </a>

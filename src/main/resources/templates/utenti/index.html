@@ -371,7 +371,7 @@ a[data-toggle="collapse"] {
               <a href="/marchi"><span class="fa fa-briefcase mr-3"></span> Lista Marchi</a>
 	          </li>
 	          <li>
-              <a href="/trucks"><span class="fa fa-sticky-note mr-3"></span> Lista Trucks</a>
+              <a href="/trucks"><span class="fa-solid fa-truck"></span> Lista Trucks</a>
 	          </li>
 	          <li>
               <a href="/ordini"><span class="fa fa-sticky-note mr-3"></span> Lista Ordini</a>
@@ -394,16 +394,12 @@ a[data-toggle="collapse"] {
 			  
 		   <a class="btn btn-primary btn-md mb-3 ms-auto" th:href="@{utenti/nuovoUtente}">Nuovo Utente</a>
 		  </div>
-		   <div th:if="${eliminazione} ">
-			    <div class="alert alert-success messaggioErrore" role="alert">
-			        <strong>Successo!</strong> <span th:text="${messaggio}"></span>
-			    </div>
+		   <div class="feedback d-none">
+		   <div class="alert alert-success messaggioErrore" role="alert">
+		   <strong>Utente eliminato con successo!</strong>
 		   </div>
-			<div th:unless="${eliminazione}">
-			    <div class="alert alert-danger messaggioErrore" role="alert">
-			        <strong>Errore!</strong> <span th:text="${messaggio}"></span>
-			    </div>
-			</div>
+		   
+		   </div>
        		<div class="row">
 				<div class="col-md-12">
 					<div class="table-wrap">
@@ -479,13 +475,40 @@ a[data-toggle="collapse"] {
 		  
 		   document.addEventListener('DOMContentLoaded', (event) => {
     let deleteModal = document.getElementById('deleteModal');
+    
+    let ElFeedback = document.querySelector(".feedback");
+	let backModal = document.querySelector('.modal-backdrop');
+
+   
     deleteModal.addEventListener('show.bs.modal', function (event) {
       let button = event.relatedTarget;
       let userId = button.getAttribute('data-id');
 
       let confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
       confirmDeleteBtn.href = 'utenti/eliminazione?idUtente=' + userId;
+      confirmDeleteBtn.addEventListener("click", mostraFeedback);
+      
     });
+    
+    function mostraFeedback(event) {
+          event.preventDefault();
+
+          deleteModal.classList.remove("show");
+          deleteModal.style.display = 'none';
+          console.log("sono dentro");
+
+          let backdrops = document.querySelectorAll('.modal-backdrop');
+          backdrops.forEach(backdrop => {
+              backdrop.remove();
+          });
+
+          ElFeedback.classList.remove("d-none");
+          setTimeout(function() {
+              location.reload();
+          }, 1000);
+      }
+
+  
   });
 	</script>
 	
