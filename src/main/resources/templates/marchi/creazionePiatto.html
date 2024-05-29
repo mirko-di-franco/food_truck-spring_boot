@@ -1,10 +1,113 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Test Thymeleaf</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  </head>
+  <body>
+	  
+	  <style>
+		  body{
+			  background-color: #3445b4;
+			  height: 100vh;
+		  }
+	  </style>
 
-</body>
+	<div class="container">
+
+		<div class="row justify-content-center align-items-center" style="height: 100vh;">
+
+			<div class="col-md-8 d-flex justify-content-center align-items-center">
+			
+				<form th:action="@{/marchi/nuovoPiatto}" method="post" th:object="${piattoDTO}" class="row g-3" style="background-color: white; padding: 40px; border-radius: 5px;">
+						<h1 class="text-center" style="color: #3445b4;">Nuovo Piatto</h1>
+						<!-- 1 -->
+					  <div class="col-md-6">
+					    <label for="nome" class="form-label">Nome</label>
+					    <!-- l'input é associato al nome di utenteDTO -->
+					    <input class="form-control" th:field="${piattoDTO.nome}">
+						<p th:if="${#fields.hasErrors('nome')}" th:errorClass="text-danger" th:errors="${piattoDTO.nome}"></p>
+					  </div>
+					  <!-- 2 -->
+					  <div class="col-md-6">
+					    <label for="descrizione" class="form-label">descrizione</label>
+					    <input class="form-control" th:field="${piattoDTO.descrizione}">
+						<p th:if="${#fields.hasErrors('descrizione')}" th:errorClass="text-danger" th:errors="${piattoDTO.descrizione}"></p>
+					  </div>
+					  <!-- 3 -->
+					  <div class="col-md-6">
+					    <label for="inputAddress" class="form-label">immagine</label>
+					    <input type="form-control" class="form-control" th:text="${piattoDTO.immagine}" name="immagine">
+							
+					  </div>
+					  <!-- 4 -->
+					  <div class="col-md-6">
+					    <label for="alimentazione" class="form-label">Alimentazione</label>
+					    	<select class="form-select" th:field="${piattoDTO.alimentazione}">
+								<option value="ONNIVORA">ONNIVORA</option>
+								<option value="VEGETARIANA">VEGETARIANA</option>
+								<option value="VEGANA">VEGANA</option>
+								<option value="PESCETARIANA">PESCETARIANA</option>
+								<option value="PALEO">PALEO</option>
+								<option value="CHETOGENICA">CHETOGENICA</option>
+								<option value="CRUDISTA">CRUDISTA</option>
+								<option value="FRUTTARIANA">FRUTTARIANA</option>
+							</select>
+							<p th:if="${#fields.hasErrors('alimentazione')}" th:errorClass="text-danger" th:errors="${piattoDTO.alimentazione}"></p>
+					  </div>
+					  <!-- 5 -->
+					  <div class="col-md-6">
+					    <label for="prezzoListino" class="form-label">Prezzo di Listino</label>
+					    <input class="form-control" type="text" th:field="${piattoDTO.prezzoListino}">
+							<p th:if="${#fields.hasErrors('prezzoListino')}" th:errorClass="text-danger" th:errors="${piattoDTO.prezzoListino}"></p>
+					  </div>
+					  <!-- 6 -->
+					   <div class="col-md-6">
+					    <label for="portata" class="form-label">Portata</label>
+					    	<select class="form-select" th:field="${piattoDTO.portata}">
+								<option value="SNACK">SNACK</option>
+								<option value="PANINO">PANINO</option>
+								<option value="BEVANDA">BEVANDA</option>
+								<option value="DOLCE">DOLCE</option>
+								<option value="SPECIALITÀ">SPECIALITÀ</option>
+								<option value="CONTORNO">CONTORNO</option>
+								<option value="FRITTO">FRITTO</option>
+								<option value="KEBAB">KEBAB</option>
+								<option value="POKE">POKE</option>
+								<option value="HOSOMAKI">HOSOMAKI</option>
+								<option value="NIGIRI">NIGIRI</option>
+								<option value="SASHIMI">SASHIMI</option>
+								<option value="GUNKAN">GUNKAN</option>
+								<option value="SALSE">SALSE</option>
+							</select>
+							<p th:if="${#fields.hasErrors('alimentazione')}" th:errorClass="text-danger" th:errors="${piattoDTO.alimentazione}"></p>
+					  </div>
+					  <!-- 7 -->
+					  <div class="col-md-6 d-flex" style=" width: -webkit-fill-available; align-items: center;">
+					    <label for="marchioId" class="form-label"style="text-wrap: nowrap; margin-right :20px; ">marchio id</label>
+					    <!-- todo marchioid si riferisce all'id del marchio, collegamento thymeleaf marchiController riga 57 -->
+					    <input class="form-control-plaintext bg-secondary bg-opacity-25 text-center rounded-3" th:field="*{marchioId}" readonly>
+							<p th:if="${#fields.hasErrors('marchioId')}" th:errorClass="text-danger" th:errors="${piattoDTO.marchioId}"></p>
+					  </div>
+					 
+					  <div class="col-12">
+					    <button type="submit" class="btn btn-success px-4">Invia</button>
+					    
+							<a class="btn btn-outline-primary" href="/marchi" role="button">Torna Indietro</a>
+						
+					  </div>
+					  
+				</form>
+				
+				
+			</div>
+
+		</div>
+
+	</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
 </html>
